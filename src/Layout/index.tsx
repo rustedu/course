@@ -1,13 +1,20 @@
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
+import Footer from './Footer'
+
+import './index.scss'
 
 const Layout = () => {
   return (
-    <div className="course-container">
+    <div className="container">
       <Header />
       <main>
-        <Outlet />
+        <div className="content">
+          <Outlet />
+        </div>
+        <Footer />
       </main>
+
     </div>
   )
 }

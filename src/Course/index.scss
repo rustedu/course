@@ -55,7 +55,11 @@ $color: red;
   & > main {
     padding-top: 36px;
     & > section {
-      margin-bottom: 40px;
+        display: none;
+      &.tab-show {
+        display: block;
+        margin-bottom: 40px;
+      }
       .title {
         margin-bottom: 24px;
       }

@@ -62,7 +62,7 @@ const TeacharList = ({ showAll }: { showAll: boolean }) => {
 
   const loadData = useCallback(async () => {
     if (showAll && allTeachars.length === 0) {
-      const res = await api.getTeachars(!showAll)
+      const res = await api.getTeachars()
       const { teacherList } = res
       setAllTeachars(teacherList)
     }

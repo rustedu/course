@@ -8,7 +8,7 @@ export async function getCourses(popular?: boolean) {
   return await fetch(url).then((res) => res.json())
 }
 
-export async function getTeachars(recommand?: boolean) {
+export async function getTeachars() {
   const url = `${BASE_URL}/seller/api/teachers/getAllTeachersByConditionsWithTotal?page=0&size=6&clientId=385`
   return await fetch(url).then((res) => res.json())
 }

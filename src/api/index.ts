@@ -1,14 +1,34 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL
+import request from '../utils/request'
 
 export async function getCourses(popular?: boolean) {
   const url = popular
-    ? `${BASE_URL}/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&clientId=385&tag=hot&isDelete=1&sort=courseIndex,asc`
-    : `${BASE_URL}/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&isDelete=1&clientId=385&sort=courseIndex,asc`
+    ? `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&clientId=385&tag=hot&isDelete=1&sort=courseIndex,asc`
+    : `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&isDelete=1&clientId=385&sort=courseIndex,asc`
 
-  return await fetch(url).then((res) => res.json())
+  return await request(url)
+}
+
+export async function getCourse(id: string) {
+  const res =  await request<never, any[]>('/seller/api/courses', {
+    params: {
+      'clientId.equals': 385,
+      'courseId.equals': id
+    }
+  })
+  return res[0]
 }
 
 export async function getTeachars() {
-  const url = `${BASE_URL}/seller/api/teachers/getAllTeachersByConditionsWithTotal?page=0&size=6&clientId=385`
-  return await fetch(url).then((res) => res.json())
+  return await request('/seller/api/teachers/getAllTeachersByConditionsWithTotal?page=0&size=6&clientId=385')
+}
+
+export async function getStudentOfCourse(courseId: string) {
+  const res =  await request<never, any[]>('/seller/api/students', {
+    params: {
+      'clientId.equals': 385,
+      'courseId.equals': courseId,
+      size: 2000,
+    }
+  })
+  return res
 }

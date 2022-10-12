@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as api from '../../api'
 import { SITE_COVER, RUST_LOGO, recommandTeachars, ITeachar } from '../../constants'
 
@@ -13,6 +13,7 @@ enum ETabs {
 }
 
 const CourseList = ({ showAll }: { showAll: boolean }) => {
+  const navigate = useNavigate()
   const [allCourses, setAllCourses] = useState<any[]>([])
   const [popularCourses, setPopularCourses] = useState<any[]>([])
   const loadingRef = useRef({ popularCourses: false, allCourses: false })
@@ -41,21 +42,19 @@ const CourseList = ({ showAll }: { showAll: boolean }) => {
   return (
     <div className="course-list">
       {data.map((item) => (
-        <Link to={`course/${item.id}`}>
-          <div key={item.id} className="course-item">
-            <img className="course-item-cover" src={item.coverUrl} alt="coverUrl" />
-            <div className="course-item-info">
-              <div className="info-title">{item.title}</div>
-              <div className="summary">{item.summary}</div>
-            </div>
-            <footer>
-              <span className="apply-num">
-                <span className="apply-num-person">{item.applyCount}</span> 人报名学习
-              </span>
-              <span className="apply-price">¥ {item.price}</span>
-            </footer>
+        <div key={item.id} className="course-item" onClick={() => navigate(`course/${item.courseId}`)}>
+          <img className="course-item-cover" src={item.coverUrl} alt="coverUrl" />
+          <div className="course-item-info">
+            <div className="info-title">{item.title}</div>
+            <div className="summary">{item.summary}</div>
           </div>
-        </Link>
+          <footer>
+            <span className="apply-num">
+              <span className="apply-num-person">{item.applyCount}</span> 人报名学习
+            </span>
+            <span className="apply-price">¥ {item.price}</span>
+          </footer>
+        </div>
       ))}
     </div>
   )

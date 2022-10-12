@@ -1,0 +1,45 @@
+.studentlist-wrap {
+  max-height: 400px;
+  overflow: auto;
+  width: 90%;
+  box-shadow: 1px 1px 10px rgba(246, 246, 246, 0.8);
+  & > table {
+    width: 100%;
+    thead {
+      background: #c9dff0;
+      tr th {
+        font-weight: bold;
+        padding: 12px 30px;
+        padding-left: 42px;
+        height: 36px;
+        box-sizing: content-box;
+        span {
+          padding-right: 20px;
+          background-repeat: no-repeat;
+          background-position: 100% 100%;
+        }
+      }
+    }
+    tbody {
+      tr {
+        color: #555;
+        &:hover {
+          background-color: #d0d0d0;
+          color: #fff;
+        }
+        td {
+          height: 28px;
+          text-align: center;
+          padding: 15px 10px;
+          &.lalign {
+            position: relative;
+            & > span {
+              position: absolute;
+              left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

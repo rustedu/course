@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Layout from './Layout'
-import CourseIndex from './Course'
-import CourseDetail from './Course/Details'
+import CourseIndex from './pages/Course'
+import CourseDetail from './pages/Course/Details'
 
 import './index.css'
 

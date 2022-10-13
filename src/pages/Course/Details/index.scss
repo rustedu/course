@@ -4,8 +4,10 @@
     position: relative;
     display: flex;
     margin-bottom: 30px;
+    height: 336px;
     .course-cover {
       width: 480px;
+      height: 100%;
       object-fit: cover;
       border-radius: 4px;
     }
@@ -21,7 +23,7 @@
         margin-bottom: 25px;
       }
       .course-info-item {
-        margin: 12px 0;
+        margin: 20px 0;
         font-size: 18px;
       }
       .course-actions {

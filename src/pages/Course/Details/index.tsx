@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react'
-import { last, groupBy, keys } from 'lodash'
+import { last, groupBy, keys, sortBy } from 'lodash'
 import { useParams } from 'react-router-dom'
-import StudentList from './StudentList'
-import { getCourse, getStudentOfCourse } from '../../../api'
 import Tabs from '../../../components/Tabs'
+import StudentList from './StudentList'
+import ReplayList from './ReplayList'
+import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
 
 import './index.scss'
 
@@ -22,6 +23,9 @@ const CourseDetail = () => {
       applyMember: any[]
       teacher: any
       if_teacher: boolean
+
+      replayList: any[]
+      validReplayList: any[]
     }>
   >({})
 
@@ -30,8 +34,9 @@ const CourseDetail = () => {
   const loadData = useCallback(async () => {
     if (courseId) {
       const courseInfo = await getCourse(courseId)
-      const studentResult = await getStudentOfCourse(courseId)
 
+      // 课程报名成员信息
+      const studentResult = await getStudentOfCourse(courseId)
       const studentCategories = groupBy(studentResult, 'status')
       const teacher = studentCategories[EStudentType.TEACHER] || []
       const tutors = studentCategories[EStudentType.TUTOR] || []
@@ -53,6 +58,14 @@ const CourseDetail = () => {
       detailRef.current.applyMember = teacher.concat(tutors, admins, students)
       detailRef.current.if_teacher = !detailRef.current.teacher
 
+      // 课程回放数据
+      const courseResult = await getReplayOfCourse(courseId)
+      detailRef.current.replayList = courseResult
+      detailRef.current.validReplayList = sortBy(
+        courseResult.filter(({ status }) => status == 1) || [],
+        (c) => c.startAt
+      )
+
       setCourseInfo(courseInfo)
       // setStudents(students)
       setLoading(false)
@@ -66,7 +79,6 @@ const CourseDetail = () => {
     return <div>loading...</div>
   }
 
-  console.log(courseInfo)
   const tabs = [
     {
       key: 'intro',
@@ -80,8 +92,8 @@ const CourseDetail = () => {
     },
     {
       key: 'replay',
-      title: '课程回放',
-      content: '课程回放-content'
+      title: `课程回放(${detailRef.current.validReplayList?.length})`,
+      content: <ReplayList data={detailRef.current.validReplayList} />
     }
   ]
   return (

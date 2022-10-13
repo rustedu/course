@@ -1,11 +1,19 @@
 import React from 'react'
-import { map } from 'lodash'
+import { map, isEmpty } from 'lodash'
+import Empty from '../../../components/Empty'
 
 import './StudentList.scss'
 
 const StudentList = (props: { data?: any[] }) => {
+  if (isEmpty(props.data)) {
+    return (
+      <div className="studentlist-wrap">
+        <Empty />
+      </div>
+    )
+  }
   return (
-    <div className="studentlist-wrap">
+    <div className="list-wrap">
       <table cellSpacing="0" cellPadding="0">
         <thead>
           <tr>
@@ -26,7 +34,7 @@ const StudentList = (props: { data?: any[] }) => {
         <tbody>
           {map(props.data, (student, index) => (
             <tr key={student.id}>
-              <td className='lalign'>
+              <td className="lalign">
                 <span>{index + 1}</span>
                 {student.name}
               </td>

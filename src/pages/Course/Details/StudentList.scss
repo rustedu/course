@@ -1,7 +1,8 @@
-.studentlist-wrap {
+.list-wrap {
   max-height: 400px;
   overflow: auto;
   width: 90%;
+  margin-top: 10px;
   box-shadow: 1px 1px 10px rgba(246, 246, 246, 0.8);
   & > table {
     width: 100%;
@@ -22,15 +23,17 @@
     }
     tbody {
       tr {
-        color: #555;
+        color: #808080;
         &:hover {
-          background-color: #d0d0d0;
-          color: #fff;
+          background-color: #f5f7fa;
         }
         td {
           height: 28px;
           text-align: center;
           padding: 15px 10px;
+          a {
+            color: #0174e1;
+          }
           &.lalign {
             position: relative;
             & > span {

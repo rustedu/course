@@ -1,17 +1,19 @@
 import request from '../utils/request'
 
+const CLIENT_ID = 385
+const PAGE_SIZE = 2000;
 export async function getCourses(popular?: boolean) {
   const url = popular
-    ? `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&clientId=385&tag=hot&isDelete=1&sort=courseIndex,asc`
-    : `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&isDelete=1&clientId=385&sort=courseIndex,asc`
+    ? `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&clientId=${CLIENT_ID}&tag=hot&isDelete=1&sort=courseIndex,asc`
+    : `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&isDelete=1&clientId=${CLIENT_ID}&sort=courseIndex,asc`
 
-  return await request(url)
+  return await request<never, { courseList: any[] }>(url)
 }
 
 export async function getCourse(id: string) {
-  const res =  await request<never, any[]>('/seller/api/courses', {
+  const res = await request<never, any[]>('/seller/api/courses', {
     params: {
-      'clientId.equals': 385,
+      'clientId.equals': CLIENT_ID,
       'courseId.equals': id
     }
   })
@@ -19,15 +21,29 @@ export async function getCourse(id: string) {
 }
 
 export async function getTeachars() {
-  return await request('/seller/api/teachers/getAllTeachersByConditionsWithTotal?page=0&size=6&clientId=385')
+  return await request<never, { teacherList: any[] }>(
+    `/seller/api/teachers/getAllTeachersByConditionsWithTotal?page=0&size=6&clientId=${CLIENT_ID}`
+  )
 }
 
 export async function getStudentOfCourse(courseId: string) {
-  const res =  await request<never, any[]>('/seller/api/students', {
+  const res = await request<never, any[]>('/seller/api/students', {
     params: {
-      'clientId.equals': 385,
+      'clientId.equals': CLIENT_ID,
       'courseId.equals': courseId,
-      size: 2000,
+      size: PAGE_SIZE
+    }
+  })
+  return res
+}
+
+export async function getReplayOfCourse(courseId: string) {
+  const res = await request<never, any[]>('/seller/api/course-classes', {
+    params: {
+      'clientId.equals': CLIENT_ID,
+      'courseId.equals': courseId,
+      size: PAGE_SIZE,
+      sort: "startAt,desc",
     }
   })
   return res

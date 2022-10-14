@@ -64,10 +64,10 @@ $footer-height: 210px;
 
   & > main {
     height: calc(100% - $header-height);
-    padding-top: 40px;
     overflow: auto;
     & > .content {
       min-height: calc(100% - #{$footer-height});
+      margin: 40px auto;
     }
     & > footer {
       background: #e0e0e0;

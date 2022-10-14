@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Layout from './Layout'
-import CourseIndex from './pages/Course'
+import HomePage from './pages/HomePage'
+import CourseList from './pages/Course'
 import CourseDetail from './pages/Course/Details'
 
 import './index.css'
@@ -15,11 +16,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <CourseIndex />
+        element: <HomePage />
       },
       {
         path: 'course',
-        element: <CourseIndex />
+        element: <CourseList showAll={true} />
       },
       {
         path: 'course/:id',

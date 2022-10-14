@@ -1,222 +1,69 @@
-$color: red;
-
-.course-wrapper {
-  & > header {
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 24px;
+  row-gap: 32px;
+  .course-item {
     width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
     position: relative;
-    img.course-cover {
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    &-cover {
       width: 100%;
-      height: 380px;
+      height: 210px;
       object-fit: cover;
     }
-    .logo-mark {
-      position: absolute;
-      bottom: 0;
-      left: 24px;
-      width: 136px;
-      height: 136px;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
+    &-info {
+      padding: 0 16px;
+      padding-top: 16px;
+      height: 140px;
+      .info-title {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 32px;
+      }
+      .summary {
+        color: #909090;
+        font-size: 14px;
+        line-height: 20px;
+        display: -webkit-box;
+        max-width: 100%;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
     }
-    .nav {
-      list-style: none;
-      height: 55px;
-      margin: 0;
-      margin-top: -4px;
-      padding: 0;
-      padding-left: 200px;
+
+    footer {
+      padding: 0 16px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 36px;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #909090;
-      li {
-        display: flex;
-        align-items: center;
-        height: calc(100% - 4px);
-        padding: 0 2px;
-        text-align: center;
-        letter-spacing: 4px;
-        cursor: pointer;
-        border-bottom: 3px solid transparent;
-        transition: all 0.2s;
-
-        &.active {
-          color: #d181ff;
-          border-color: #d181ff;
+      color: #ff8600;
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      right: 0;
+      .apply-num {
+        font-size: 14px;
+        &-person {
+          font-size: 16px;
+          font-style: italic;
         }
-        &:hover {
-          color: #d181ff;
-        }
+      }
+      .apply-price {
+        font-size: 24px;
+        font-weight: 600;
       }
     }
-  }
-
-  & > main {
-    padding-top: 36px;
-    & > section {
-        display: none;
-      &.tab-show {
-        display: block;
-        margin-bottom: 40px;
-      }
-      .title {
-        margin-bottom: 24px;
-      }
+    &:hover {
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      transform: translate(-1px, -4px);
     }
-    .course-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 24px;
-      row-gap: 32px;
-      .course-item {
-        width: 100%;
-        height: 100%;
-        border-radius: 4px;
-        overflow: hidden;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-        transition: all 0.3s ease 0s;
-        cursor: pointer;
-        &-cover {
-          width: 100%;
-          height: 210px;
-          object-fit: cover;
-        }
-        &-info {
-          padding: 0 16px;
-          padding-top: 16px;
-          height: 140px;
-          .info-title {
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 32px;
-          }
-          .summary {
-            color: #909090;
-            font-size: 14px;
-            line-height: 20px;
-            display: -webkit-box;
-            max-width: 100%;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-          }
-        }
-
-        footer {
-          padding: 0 16px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          color: #ff8600;
-          position: absolute;
-          bottom: 6px;
-          left: 0;
-          right: 0;
-          .apply-num {
-            font-size: 14px;
-            &-person {
-              font-size: 16px;
-              font-style: italic;
-            }
-          }
-          .apply-price {
-            font-size: 24px;
-            font-weight: 600;
-          }
-        }
-        &:hover {
-          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-          transform: translate(-1px, -4px);
-        }
-      }
-    }
-
-    .teachar-recommand {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 30px;
-
-      .teachar-intro {
-        height: 190px;
-        border-radius: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        padding: 20px 18px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-
-        display: flex;
-        align-items: center;
-
-        .avatar {
-          width: 160px;
-          height: 160px;
-          border-radius: 50%;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        .info {
-          flex: 1;
-          margin-left: 20px;
-          .teachar-title {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 8px;
-          }
-          .teachar-name {
-            display: inline-block;
-            font-size: 22px;
-            color: #9930d4;
-          }
-
-          .teachar-tag {
-            font-size: 14px;
-            background-color: #f7e8ff;
-            color: #9930d4;
-            display: inline-block;
-            padding: 0 10px;
-            border-radius: 8px;
-            & > span {
-              display: inline-block;
-              font-style: italic;
-              margin: 0 4px;
-            }
-          }
-          .teach-intro {
-            letter-spacing: 1px;
-            font-size: 15px;
-            text-align: justify;
-          }
-        }
-      }
-    }
-    .organize {
-      display: flex;
-      .intro {
-        flex: 1;
-        font-size: 18px;
-        letter-spacing: 1px;
-        line-height: 30px;
-        text-align: justify;
-      }
-      .organize-logo {
-        margin-left: 20px;
-        height: 240px;
-        object-fit: cover;
-      }
-    }
-  }
-}
-
-.title {
-  font-weight: 700;
-  font-style: normal;
-  font-size: 22px;
-  &:before {
-    content: '';
-    border-left: 4px solid #0170fe;
-    margin-right: 6px;
   }
 }

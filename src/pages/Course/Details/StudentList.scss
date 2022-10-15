@@ -36,9 +36,14 @@
           }
           &.lalign {
             position: relative;
-            & > span {
+            & > span.index {
               position: absolute;
               left: 10px;
+            }
+            .student-name {
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
             }
           }
         }

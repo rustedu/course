@@ -4,6 +4,19 @@ import Empty from '../../../components/Empty'
 
 import './StudentList.scss'
 
+export enum EStudentType {
+  TEACHER = '2',
+  TUTOR = '4',
+  ADMIN = '5',
+  STUDENT = '1'
+}
+
+const iconMap: Record<string, string> = {
+  '2': 'status-teacher.png',
+  '4': 'status-ta.png',
+  '5': 'status-admin.png'
+}
+
 const StudentList = (props: { data?: any[] }) => {
   if (isEmpty(props.data)) {
     return (
@@ -35,8 +48,17 @@ const StudentList = (props: { data?: any[] }) => {
           {map(props.data, (student, index) => (
             <tr key={student.id}>
               <td className="lalign">
-                <span>{index + 1}</span>
-                {student.name}
+                <span className="index">{index + 1}</span>
+                <span className="student-name">
+                  {student.name}
+                  {student.status !== EStudentType.STUDENT && (
+                    <img
+                      height="14"
+                      src={`/img/${iconMap[student.status]}`}
+                      alt="student-status-png"
+                    ></img>
+                  )}
+                </span>
               </td>
               <td>{student.age}</td>
               <td>{student.gender}</td>

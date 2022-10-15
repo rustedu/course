@@ -2,18 +2,12 @@ import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react'
 import { last, groupBy, keys, sortBy } from 'lodash'
 import { useParams } from 'react-router-dom'
 import Tabs from '../../../components/Tabs'
-import StudentList from './StudentList'
+import StudentList, { EStudentType } from './StudentList'
 import ReplayList from './ReplayList'
 import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
 
 import './index.scss'
 
-enum EStudentType {
-  TEACHER = '2',
-  TUTOR = '4',
-  ADMIN = '5',
-  STUDENT = '1'
-}
 const CourseDetail = () => {
   const [courseInfo, setCourseInfo] = useState<any>({})
   // const [students, setStudents] = useState<any[]>([])

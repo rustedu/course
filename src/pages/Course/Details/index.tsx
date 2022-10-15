@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { last, groupBy, keys, sortBy } from 'lodash'
 import { useParams } from 'react-router-dom'
 import Tabs from '../../../components/Tabs'
@@ -8,6 +8,9 @@ import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
 
 import './index.scss'
 
+const Action = () => {
+  return <button className="btn"> 登录</button>
+}
 const CourseDetail = () => {
   const [courseInfo, setCourseInfo] = useState<any>({})
   // const [students, setStudents] = useState<any[]>([])
@@ -105,7 +108,7 @@ const CourseDetail = () => {
 
           <div className="course-actions">
             <div className="course-price">¥ {courseInfo.price}</div>
-            <button className="btn"> 登录</button>
+            <Action />
           </div>
         </div>
         <div className="share-area">

@@ -3,16 +3,9 @@ import { Link } from 'react-router-dom'
 import { Dropdown, Menu, Modal, Form, Input, Button, message } from 'antd'
 import { USER_INFO_STORAGE_KEY, DETAULT_USER_AVATAR } from '../constants'
 import VerificationCode, { VerificationCodeNum } from '../components/VerificationCode'
+import { useAppState } from '../hook'
 
 const PhoneRegex = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
-interface IUser {
-  nickname: string
-  avatar: string
-  // role: '',
-  // access_token: '',
-  // token: ''
-  // status:'',
-}
 interface IFromProps {
   phone: string
   code: string
@@ -42,8 +35,8 @@ const LoginForm = (props: { onSubmit: (phone: string) => void | Promise<boolean>
       <Form.Item
         name="phone"
         rules={[
-          { required: true, message: '请输入手机号' }
-          //   { pattern: PhoneRegex, message: '请输入正确手机号' }
+          { required: true, message: '请输入手机号' },
+          { pattern: PhoneRegex, message: '请输入正确手机号' }
         ]}
       >
         <Input placeholder="请输入手机号" />
@@ -71,15 +64,29 @@ const LoginForm = (props: { onSubmit: (phone: string) => void | Promise<boolean>
   )
 }
 const LoginStatus = () => {
-  const [user, setUser] = useState<Partial<IUser>>({})
+  const {
+    state: { currentUser },
+    dispatch
+  } = useAppState()
   const [loginVisible, setLoginVisible] = useState(false)
+
+  const login = (phone: string) => {
+    dispatch({
+      type: 'LOGIN',
+      payload: {
+        nickname: phone
+      }
+    })
+  }
+  const logout = () => {
+    dispatch({
+      type: 'LOGOUT'
+    })
+  }
   const initUserInfo = useCallback(() => {
     const phone = localStorage.getItem(USER_INFO_STORAGE_KEY)
     if (phone) {
-      setUser({
-        nickname: phone,
-        avatar: DETAULT_USER_AVATAR
-      })
+      login(phone)
     }
   }, [])
   useEffect(() => {
@@ -90,12 +97,9 @@ const LoginStatus = () => {
     localStorage.setItem(USER_INFO_STORAGE_KEY, phone)
     message.success('登录成功，欢迎回来!')
     setLoginVisible(false)
-    setUser({
-      nickname: phone,
-      avatar: DETAULT_USER_AVATAR
-    })
+    login(phone)
   }
-  if (!user.nickname) {
+  if (!currentUser?.nickname) {
     return (
       <>
         <span onClick={() => setLoginVisible(true)}>登录</span>
@@ -117,10 +121,7 @@ const LoginStatus = () => {
         console.log(key)
         if (key === 'logout') {
           localStorage.removeItem(USER_INFO_STORAGE_KEY)
-          setUser({
-            nickname: undefined,
-            avatar: undefined
-          })
+          logout()
         }
       }}
       items={[
@@ -138,7 +139,8 @@ const LoginStatus = () => {
   return (
     <Dropdown overlayClassName="user-dropdown-menus" overlay={menu} placement="bottomRight" arrow>
       <span className="not-link">
-        <img width={30} src={user.avatar} alt="avatar" /> {user.nickname}
+        <img width={30} src={currentUser.avatar || DETAULT_USER_AVATAR} alt="avatar" />{' '}
+        {currentUser.nickname}
       </span>
     </Dropdown>
   )

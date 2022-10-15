@@ -6,3 +6,6 @@ export interface IUser {
   // token: ''
   // status:'',
 }
+
+
+export type TAppState = { currentUser?: IUser }

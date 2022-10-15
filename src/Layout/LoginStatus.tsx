@@ -99,7 +99,13 @@ const LoginStatus = () => {
     return (
       <>
         <span onClick={() => setLoginVisible(true)}>登录</span>
-        <Modal width={350} open={loginVisible} footer={null}>
+        <Modal
+          width={350}
+          open={loginVisible}
+          footer={null}
+          onCancel={() => setLoginVisible(false)}
+          maskClosable={false}
+        >
           <LoginForm onSubmit={handleSubmit} />
         </Modal>
       </>
@@ -130,12 +136,7 @@ const LoginStatus = () => {
     />
   )
   return (
-    <Dropdown
-      overlayClassName="user-dropdown-menus"
-      overlay={menu}
-      placement="bottomRight"
-      arrow
-    >
+    <Dropdown overlayClassName="user-dropdown-menus" overlay={menu} placement="bottomRight" arrow>
       <span className="not-link">
         <img width={30} src={user.avatar} alt="avatar" /> {user.nickname}
       </span>

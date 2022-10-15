@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, useNavigate, useRoutes } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import LoginStatus from './LoginStatus'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ const Header = () => {
           <Link to="/">
             <span className="action-item">首页</span>
           </Link>
-          <span>登录</span>
+          <LoginStatus />
         </div>
       </div>
     </header>

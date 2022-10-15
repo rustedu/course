@@ -50,6 +50,10 @@ $footer-height: 210px;
         cursor: pointer;
         transition: all 0.3s ease 0s;
         letter-spacing: 1px;
+      }
+
+      & > a,
+      & > span:not(.not-link) {
         &:hover {
           color: #ff589e;
         }
@@ -130,6 +134,44 @@ $footer-height: 210px;
         font-size: 14px;
         line-height: 70px;
         color: #333;
+      }
+    }
+  }
+}
+
+.user-dropdown-menus {
+  .ant-dropdown-menu {
+    padding: 0;
+
+    &-item {
+      height: 36px;
+      &-active {
+        color: #66b1ff;
+        background: #ecf5ff;
+      }
+    }
+  }
+}
+
+.login-form {
+  & > h3 {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 16px 0 20px;
+    text-align: center;
+    color: #333;
+  }
+  .ant-form-item-control-input {
+    input {
+      background: #f9f9f9;
+    }
+  }
+  .ant-form-item-control-input-content {
+    button {
+      border-color: #3db477;
+      background: #3db477;
+      &:hover {
+        opacity: 0.8;
       }
     }
   }

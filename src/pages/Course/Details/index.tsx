@@ -21,6 +21,7 @@ const Action = (props: {
     state: { currentUser, myRegisters },
     dispatch
   } = useAppState()
+  const { id: courseId } = useParams<{ id: string }>()
   const openLoginDialog = () => {
     dispatch({
       type: 'UPDATE_LOGIN_DIALOG_VISIBLE',
@@ -36,7 +37,7 @@ const Action = (props: {
   }
 
   if (currentUser?.phone) {
-    const registerCourse = find(myRegisters, (course) => course.phone === currentUser.phone)
+    const registerCourse = find(myRegisters, (course) => course.courseId === courseId)
 
     return !!registerCourse ? (
       <button className="btn" onClick={() => enterCourse(registerCourse)}>

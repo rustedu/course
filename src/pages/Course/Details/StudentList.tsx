@@ -1,6 +1,5 @@
-import React from 'react'
 import { map, isEmpty } from 'lodash'
-import Empty from '../../../components/Empty'
+import { Empty } from 'antd'
 import { EUserType } from '../../../types'
 
 import './StudentList.scss'

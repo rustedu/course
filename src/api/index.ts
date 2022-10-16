@@ -3,10 +3,20 @@ import type { IMyRegister } from '../types'
 
 const CLIENT_ID = 385
 const PAGE_SIZE = 2000
+
+export async function getSiteConfig() {
+  const res = await request<never, any[]>('/seller/api/homepages', {
+    params: {
+      'clientId.equals': CLIENT_ID
+    }
+  })
+  return res[0]
+}
+
 export async function getCourses(popular?: boolean) {
   const url = popular
     ? `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&clientId=${CLIENT_ID}&tag=hot&isDelete=1&sort=courseIndex,asc`
-    : `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&isDelete=1&clientId=${CLIENT_ID}&sort=courseIndex,asc`
+    : `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=100&isDelete=1&clientId=${CLIENT_ID}&sort=courseIndex,asc`
 
   return await request<never, { courseList: any[] }>(url)
 }

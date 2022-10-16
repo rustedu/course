@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { SITE_COVER, RUST_LOGO } from '../../constants'
+import { Spin } from 'antd'
+import { useSiteConfig } from '../../hooks'
 import CourseList from '../Course'
 import TeacharList from '../Course/TeacherList'
 
@@ -38,6 +39,8 @@ function HomePage() {
   const [tab, setTab] = useState<ETabs>(ETabs.INDEX)
   const isIndexTab = tab === ETabs.INDEX
 
+  const [siteConfig, loading] = useSiteConfig()
+
   const renderMainContent = () => {
     return (
       <>
@@ -54,35 +57,34 @@ function HomePage() {
   }
   return (
     <div className="home-wrapper">
-      <header>
-        <img className="intro-cover" src={SITE_COVER} alt="site-cover" />
-        <img src="/img/logo.png" alt="logo-mark" className="logo-mark" />
-        <ul className="nav">
-          {nav.map((item) => (
-            <li
-              className={`${item.key === tab ? 'active' : ''}`}
-              key={item.key}
-              onClick={() => setTab(item.key)}
-            >
-              {item.title}
-            </li>
-          ))}
-        </ul>
-      </header>
+      <Spin spinning={loading}>
+        <header className="home-wrapper-header">
+          <img className="intro-cover" src={siteConfig.coverUrl} alt="site-cover" />
+          <img src={siteConfig.consultUrl} alt="logo-mark" className="logo-mark" />
+          <ul className="nav">
+            {nav.map((item) => (
+              <li
+                className={`${item.key === tab ? 'active' : ''}`}
+                key={item.key}
+                onClick={() => setTab(item.key)}
+              >
+                {item.title}
+              </li>
+            ))}
+          </ul>
+        </header>
 
-      <main>
-        {renderMainContent()}
-        <section className={setTabClassName(isIndexTab || tab === ETabs.ABOUT)}>
-          <div className="title">机构介绍</div>
-          <div className="organize">
-            <div className="intro">
-              操作系统是计算机系统中负责管理各种软硬件资源的核心系统软件，为应用软件运行提供良好的环境。掌握操作系统的基本原理及其核心技术是研究型大学计算机专业本科毕业生的基本要求。
-              本课程是计算机专业核心课，以主流操作系统为实例，以教学操作系统ucore为实验环境，讲授操作系统的概念、基本原理和实现技术，为学生从事操作系统软件研究和开发，以及充分利用操作系统功能进行应用软件研究和开发打下扎实的基础。
+        <main className="home-wrapper-content">
+          {renderMainContent()}
+          <section className={setTabClassName(isIndexTab || tab === ETabs.ABOUT)}>
+            <div className="title">机构介绍</div>
+            <div className="organize">
+              <div className="intro">{siteConfig.aboutUsInfo}</div>
+              <img src={siteConfig.aboutUsImgUrl} alt="organize-logo" className="organize-logo" />
             </div>
-            <img src={RUST_LOGO} alt="organize-logo" className="organize-logo" />
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      </Spin>
     </div>
   )
 }

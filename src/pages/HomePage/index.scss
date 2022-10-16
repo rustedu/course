@@ -1,7 +1,7 @@
 $color: red;
 
 .home-wrapper {
-  & > header {
+  &-header {
     width: 100%;
     position: relative;
     img.intro-cover {
@@ -52,7 +52,7 @@ $color: red;
     }
   }
 
-  & > main {
+  &-content {
     padding-top: 36px;
     & > section {
       display: none;
@@ -71,10 +71,12 @@ $color: red;
         line-height: 30px;
         text-align: justify;
       }
-      .organize-logo {
+      &-logo {
         margin-left: 20px;
-        height: 240px;
-        object-fit: cover;
+        width: 360px;
+        object-fit: contain;
+        border: 1px solid #eaeaea;
+        border-radius: 4px;
       }
     }
   }

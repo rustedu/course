@@ -1,23 +1,63 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
-import { last, groupBy, keys, sortBy } from 'lodash'
+import { last, groupBy, keys, sortBy, find } from 'lodash'
 import { useParams } from 'react-router-dom'
 import Tabs from '../../../components/Tabs'
-import StudentList, { EStudentType } from './StudentList'
-import ReplayList from './ReplayList'
+import RegisterModal from '../../../components/RegisterModal'
+import { useAppState } from '../../../context'
+import { RoleNameMap } from '../../../constants'
 import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
+import StudentList from './StudentList'
+import { EUserType as EStudentType, IMyApplyCourse } from '../../../types'
+import ReplayList from './ReplayList'
 
 import './index.scss'
 
-const Action = () => {
-  return <button className="btn"> 登录</button>
+const Action = (props: {
+  courseInfo: any
+  onRegisterCourse?: (newCourse: IMyApplyCourse) => void
+}) => {
+  const {
+    state: { currentUser, myCourses },
+    dispatch
+  } = useAppState()
+  const openLoginDialog = () => {
+    dispatch({
+      type: 'UPDATE_LOGIN_DIALOG_VISIBLE',
+      payload: true
+    })
+  }
+  const enterCourse = (registerCourse: IMyApplyCourse) => {
+    const { name, phone, status } = registerCourse
+    const url = `https://room.rustedu.com?username=${name}&userId=${phone}&role=${
+      RoleNameMap[status] || 'student'
+    }&roomId=${props.courseInfo.roomId}&video=${props.courseInfo.ishd || '480p'}`
+    window.open(url)
+  }
+
+  if (currentUser?.phone) {
+    const registerCourse = find(myCourses, (course) => course.phone === currentUser.phone)
+
+    return !!registerCourse ? (
+      <button className="btn" onClick={() => enterCourse(registerCourse)}>
+        已报名，进入教室
+      </button>
+    ) : (
+      <RegisterModal {...props} />
+    )
+  }
+  return (
+    <button style={{ width: 100 }} className="btn" onClick={openLoginDialog}>
+      登录
+    </button>
+  )
 }
 const CourseDetail = () => {
   const [courseInfo, setCourseInfo] = useState<any>({})
-  // const [students, setStudents] = useState<any[]>([])
+  const [students, setStudents] = useState<any[]>([])
   const detailRef = useRef<
     Partial<{
       applyStudents: any[]
-      applyMember: any[]
+      // applyMember: any[]
       teacher: any
       if_teacher: boolean
 
@@ -50,9 +90,9 @@ const CourseDetail = () => {
           students = students.concat(studentCategories[key])
         })
 
-      detailRef.current.applyStudents = students
+      detailRef.current.applyStudents = students // 排除 老师，助教，管理员, 剩下的才认为是学生
       detailRef.current.teacher = last(teacher)
-      detailRef.current.applyMember = teacher.concat(tutors, admins, students)
+      setStudents(teacher.concat(tutors, admins, students))
       detailRef.current.if_teacher = !detailRef.current.teacher
 
       // 课程回放数据
@@ -64,7 +104,6 @@ const CourseDetail = () => {
       )
 
       setCourseInfo(courseInfo)
-      // setStudents(students)
       setLoading(false)
     }
   }, [courseId])
@@ -84,8 +123,8 @@ const CourseDetail = () => {
     },
     {
       key: 'student',
-      title: `报名成员(${detailRef.current.applyMember?.length || 0})`,
-      content: <StudentList data={detailRef.current.applyMember} />
+      title: `报名成员(${students?.length || 0})`,
+      content: <StudentList data={students} />
     },
     {
       key: 'replay',
@@ -93,6 +132,10 @@ const CourseDetail = () => {
       content: <ReplayList data={detailRef.current.validReplayList} />
     }
   ]
+  const handleRegister = (newCourse: any) => {
+    setStudents((students ||[]).concat(newCourse))
+    detailRef.current.applyStudents = (detailRef.current.applyStudents || []).concat(newCourse)
+  }
   return (
     <div className="course-detail-wrapper">
       <section className="main-content">
@@ -108,7 +151,7 @@ const CourseDetail = () => {
 
           <div className="course-actions">
             <div className="course-price">¥ {courseInfo.price}</div>
-            <Action />
+            <Action courseInfo={courseInfo} onRegisterCourse={handleRegister} />
           </div>
         </div>
         <div className="share-area">

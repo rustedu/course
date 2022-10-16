@@ -1,15 +1,9 @@
 import React from 'react'
 import { map, isEmpty } from 'lodash'
 import Empty from '../../../components/Empty'
+import { EUserType } from '../../../types'
 
 import './StudentList.scss'
-
-export enum EStudentType {
-  TEACHER = '2',
-  TUTOR = '4',
-  ADMIN = '5',
-  STUDENT = '1'
-}
 
 const iconMap: Record<string, string> = {
   '2': 'status-teacher.png',
@@ -51,7 +45,7 @@ const StudentList = (props: { data?: any[] }) => {
                 <span className="index">{index + 1}</span>
                 <span className="student-name">
                   {student.name}
-                  {student.status !== EStudentType.STUDENT && (
+                  {student.status !== EUserType.STUDENT && (
                     <img
                       height="14"
                       src={`/img/${iconMap[student.status]}`}

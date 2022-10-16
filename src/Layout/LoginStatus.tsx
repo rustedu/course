@@ -30,7 +30,7 @@ const LoginForm = (props: { onSubmit: (phone: string) => void | Promise<boolean>
   }
 
   return (
-    <Form form={form} className="login-form" onFinish={onFinish} autoComplete="off" size="large">
+    <Form form={form} className="normal-form" onFinish={onFinish} autoComplete="off" size="large">
       <h3>请使用手机号登录</h3>
       <Form.Item
         name="phone"
@@ -65,16 +65,22 @@ const LoginForm = (props: { onSubmit: (phone: string) => void | Promise<boolean>
 }
 const LoginStatus = () => {
   const {
-    state: { currentUser },
+    state: { currentUser, loginDialogVisible },
     dispatch
   } = useAppState()
-  const [loginVisible, setLoginVisible] = useState(false)
+
+  const setLoginVisible = (visible: boolean) => {
+    dispatch({
+      type: 'UPDATE_LOGIN_DIALOG_VISIBLE',
+      payload: visible
+    })
+  }
 
   const login = (phone: string) => {
     dispatch({
       type: 'LOGIN',
       payload: {
-        nickname: phone
+        phone
       }
     })
   }
@@ -99,13 +105,13 @@ const LoginStatus = () => {
     setLoginVisible(false)
     login(phone)
   }
-  if (!currentUser?.nickname) {
+  if (!currentUser?.phone) {
     return (
       <>
         <span onClick={() => setLoginVisible(true)}>登录</span>
         <Modal
           width={350}
-          open={loginVisible}
+          open={loginDialogVisible}
           footer={null}
           onCancel={() => setLoginVisible(false)}
           maskClosable={false}
@@ -118,7 +124,6 @@ const LoginStatus = () => {
   const menu = (
     <Menu
       onClick={({ key }) => {
-        console.log(key)
         if (key === 'logout') {
           localStorage.removeItem(USER_INFO_STORAGE_KEY)
           logout()
@@ -139,8 +144,8 @@ const LoginStatus = () => {
   return (
     <Dropdown overlayClassName="user-dropdown-menus" overlay={menu} placement="bottomRight" arrow>
       <span className="not-link">
-        <img width={30} src={currentUser.avatar || DETAULT_USER_AVATAR} alt="avatar" />{' '}
-        {currentUser.nickname}
+        <img width={30} src={DETAULT_USER_AVATAR} alt="avatar" />
+        {currentUser.phone}
       </span>
     </Dropdown>
   )

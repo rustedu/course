@@ -1,9 +1,19 @@
 import React, { useReducer, createContext, useContext } from 'react'
-import { DETAULT_USER_AVATAR } from './constants'
+import { DETAULT_USER_AVATAR, USER_INFO_STORAGE_KEY } from './constants'
 
-import type { IUser, TAppState } from './types'
+import type { ICurrentUser, IMyApplyCourse } from './types'
 
-type Action = { type: 'LOGIN'; payload: IUser } | { type: 'LOGOUT' }
+export type TAppState = {
+  currentUser?: ICurrentUser
+  myCourses?: IMyApplyCourse[]
+  loginDialogVisible: boolean
+}
+
+type Action =
+  | { type: 'LOGIN'; payload: ICurrentUser }
+  | { type: 'LOGOUT' }
+  | { type: 'UPDATE_MY_COURSES'; payload?: IMyApplyCourse[] }
+  | { type: 'UPDATE_LOGIN_DIALOG_VISIBLE'; payload: boolean }
 
 const rootReducer = (state: TAppState, action: Action) => {
   switch (action.type) {
@@ -13,6 +23,12 @@ const rootReducer = (state: TAppState, action: Action) => {
     case 'LOGOUT': {
       return { ...state, currentUser: undefined }
     }
+    case 'UPDATE_MY_COURSES': {
+      return { ...state, myCourses: action.payload }
+    }
+    case 'UPDATE_LOGIN_DIALOG_VISIBLE': {
+      return { ...state, loginDialogVisible: action.payload }
+    }
     default: {
       throw new Error(`[count-context] Unhandled action type: ${(action as any).type}`)
     }
@@ -20,7 +36,9 @@ const rootReducer = (state: TAppState, action: Action) => {
 }
 
 const initialState: TAppState = {
-  currentUser: { nickname: '', avatar: DETAULT_USER_AVATAR }
+  currentUser: { phone: localStorage.getItem(USER_INFO_STORAGE_KEY) },
+  myCourses: [],
+  loginDialogVisible: false
 }
 const defaultDispatch: React.Dispatch<Action> = () => initialState // we never actually use this
 const AppContext = createContext({

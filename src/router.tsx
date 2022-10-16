@@ -5,8 +5,6 @@ import HomePage from './pages/HomePage'
 import CourseList from './pages/Course'
 import CourseDetail from './pages/Course/Details'
 
-import './index.css'
-
 export default createBrowserRouter([
   {
     path: '/',

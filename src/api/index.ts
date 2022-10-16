@@ -1,7 +1,8 @@
 import request from '../utils/request'
+import type { IMyApplyCourse } from '../types'
 
 const CLIENT_ID = 385
-const PAGE_SIZE = 2000;
+const PAGE_SIZE = 2000
 export async function getCourses(popular?: boolean) {
   const url = popular
     ? `/seller/api/coursesget/getAllCoursesByConditionsWithTotal?page=0&size=18&clientId=${CLIENT_ID}&tag=hot&isDelete=1&sort=courseIndex,asc`
@@ -43,7 +44,25 @@ export async function getReplayOfCourse(courseId: string) {
       'clientId.equals': CLIENT_ID,
       'courseId.equals': courseId,
       size: PAGE_SIZE,
-      sort: "startAt,desc",
+      sort: 'startAt,desc'
+    }
+  })
+  return res
+}
+
+export async function registerCourse(data: any) {
+  const res = await request<never, IMyApplyCourse>('/seller/api/students', {
+    method: 'POST',
+    data
+  })
+  return res
+}
+
+export async function getMyCourses(phone: string) {
+  const res = await request<never, IMyApplyCourse[]>('/seller/api/students', {
+    params: {
+      'clientId.equals': CLIENT_ID,
+      'phone.equals': phone
     }
   })
   return res

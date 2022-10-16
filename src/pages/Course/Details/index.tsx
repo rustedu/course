@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { last, groupBy, keys, sortBy, find } from 'lodash'
 import { useParams } from 'react-router-dom'
+import { EUserType as EStudentType, IMyRegister } from '../../../types'
 import Tabs from '../../../components/Tabs'
+import Loading from '../../../components/Loading'
 import RegisterModal from '../../../components/RegisterModal'
 import { useAppState } from '../../../hooks'
 import { RoleNameMap } from '../../../constants'
 import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
 import StudentList from './StudentList'
-import { EUserType as EStudentType, IMyRegister } from '../../../types'
 import ReplayList from './ReplayList'
 
 import './index.scss'
@@ -112,7 +113,7 @@ const CourseDetail = () => {
   }, [loadData])
 
   if (loading) {
-    return <div>loading...</div>
+    return <Loading />
   }
 
   const tabs = [
@@ -133,7 +134,7 @@ const CourseDetail = () => {
     }
   ]
   const handleRegister = (newCourse: any) => {
-    setStudents((students ||[]).concat(newCourse))
+    setStudents((students || []).concat(newCourse))
     detailRef.current.applyStudents = (detailRef.current.applyStudents || []).concat(newCourse)
   }
   return (

@@ -32,8 +32,8 @@ $footer-height: 210px;
         color: #8362ee;
       }
       .logo-content {
-        color: #333;
-        font-size: 22px;
+        color: #555;
+        font-size: 20px;
       }
     }
 
@@ -71,7 +71,10 @@ $footer-height: 210px;
     overflow: auto;
     & > .content {
       min-height: calc(100% - #{$footer-height});
-      margin: 40px auto;
+      margin: 0 auto;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
     }
     & > footer {
       background: #e0e0e0;

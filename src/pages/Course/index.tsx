@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as api from '../../api'
+import Loading from '../../components/Loading'
 
-import "./index.scss"
+import './index.scss'
 
 const CourseList = ({ showAll }: { showAll: boolean }) => {
   const navigate = useNavigate()
@@ -31,6 +32,9 @@ const CourseList = ({ showAll }: { showAll: boolean }) => {
     loadCourses()
   }, [loadCourses])
 
+  if (!loadingRef.current[loadingKey]) {
+    return <Loading />
+  }
   return (
     <div className="course-list">
       {data.map((item) => (

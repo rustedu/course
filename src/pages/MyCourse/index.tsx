@@ -7,10 +7,11 @@ import { RoleNameMap } from '../../constants'
 import { EUserType } from '../../types'
 
 import './index.scss'
+import Loading from '../../components/Loading'
 
 const MyCourseList = () => {
   const [myCourses, setMyCourses] = useState<any[]>([])
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState()
   const {
     state: { currentUser, myRegisters }
   } = useAppState()
@@ -51,31 +52,35 @@ const MyCourseList = () => {
         共报名课程: <strong>{total}</strong>
       </div>
 
-      <div className="mycourse-list">
-        {map(myCourses, (course: any) => (
-          <div
-            key={course.id}
-            className="course-item"
-            onClick={() => navigate(`/course/${course.courseId}`)}
-          >
-            <img className="course-item-cover" src={course.coverUrl} alt="cover" />
-            <div className="course-item-content">
-              <h3>{course.title}</h3>
-              <div className="summary">{course.summary}</div>
-              <div className="room">教室号: {course.roomId}</div>
-              <button
-                className="btn"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  enterClass(course)
-                }}
-              >
-                进入课堂
-              </button>
+      {total === undefined ? (
+        <Loading />
+      ) : (
+        <div className="mycourse-list">
+          {map(myCourses, (course: any) => (
+            <div
+              key={course.id}
+              className="course-item"
+              onClick={() => navigate(`/course/${course.courseId}`)}
+            >
+              <img className="course-item-cover" src={course.coverUrl} alt="cover" />
+              <div className="course-item-content">
+                <h3>{course.title}</h3>
+                <div className="summary">{course.summary}</div>
+                <div className="room">教室号: {course.roomId}</div>
+                <button
+                  className="btn"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    enterClass(course)
+                  }}
+                >
+                  进入课堂
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

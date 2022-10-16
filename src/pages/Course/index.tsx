@@ -37,7 +37,7 @@ const CourseList = ({ showAll }: { showAll: boolean }) => {
         <div
           key={item.id}
           className="course-item"
-          onClick={() => navigate(`course/${item.courseId}`)}
+          onClick={() => navigate(`/course/${item.courseId}`)}
         >
           <img className="course-item-cover" src={item.coverUrl} alt="coverUrl" />
           <div className="course-item-info">

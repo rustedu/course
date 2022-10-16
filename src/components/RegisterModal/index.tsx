@@ -2,14 +2,14 @@ import { useState } from 'react'
 import { Modal, Form, Input, Button, Radio, Select } from 'antd'
 import { USER_INFO_STORAGE_KEY } from '../../constants'
 import { registerCourse } from '../../api'
-import { useAppState } from '../../context'
-import { IMyApplyCourse } from '../../types'
+import { useAppState } from '../../hooks'
+import { IMyRegister } from '../../types'
 
 interface IProps {
   courseInfo: any
   applyStudents?: any[]
   defaultVisible?: boolean
-  onRegisterCourse?: (newCourse: IMyApplyCourse) => void
+  onRegisterCourse?: (newCourse: IMyRegister) => void
 }
 
 interface IFromProps {
@@ -52,7 +52,7 @@ const tags = [
 
 const RegisterForm = (props: {
   courseInfo: any
-  onSubmit: (values: IMyApplyCourse) => void | Promise<boolean>
+  onSubmit: (values: IMyRegister) => void | Promise<boolean>
 }) => {
   const [form] = Form.useForm<IFromProps>()
 
@@ -133,7 +133,7 @@ const RegisterModal = (props: IProps) => {
     dispatch
   } = useAppState()
 
-  const handleSubmit = (newCourse: IMyApplyCourse) => {
+  const handleSubmit = (newCourse: IMyRegister) => {
     dispatch({
       type: 'UPDATE_MY_COURSES',
       payload: (myCourses || []).concat(newCourse)

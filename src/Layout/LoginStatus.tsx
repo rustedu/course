@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Dropdown, Menu, Modal, Form, Input, Button, message } from 'antd'
 import { USER_INFO_STORAGE_KEY, DETAULT_USER_AVATAR } from '../constants'
 import VerificationCode, { VerificationCodeNum } from '../components/VerificationCode'
-import { useAppState } from '../hook'
+import { useAppState } from '../hooks'
 
 const PhoneRegex = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
 interface IFromProps {

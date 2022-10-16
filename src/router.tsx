@@ -4,6 +4,7 @@ import Layout from './Layout'
 import HomePage from './pages/HomePage'
 import CourseList from './pages/Course'
 import CourseDetail from './pages/Course/Details'
+import MyCourseList from './pages/MyCourse'
 
 export default createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export default createBrowserRouter([
       {
         path: 'course/:id',
         element: <CourseDetail />
+      },
+      {
+        path: 'myCourse',
+        element: <MyCourseList />
       }
     ]
   }

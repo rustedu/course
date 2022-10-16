@@ -13,7 +13,7 @@ export interface ICurrentUser {
   phone?: string | null
 }
 
-export interface IMyApplyCourse {
+export interface IMyRegister {
   id: IDType
   clientId: IDType
   courseId: IDType

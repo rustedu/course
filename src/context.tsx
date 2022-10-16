@@ -1,18 +1,18 @@
 import React, { useReducer, createContext, useContext } from 'react'
-import { DETAULT_USER_AVATAR, USER_INFO_STORAGE_KEY } from './constants'
+import { USER_INFO_STORAGE_KEY } from './constants'
 
-import type { ICurrentUser, IMyApplyCourse } from './types'
+import type { ICurrentUser, IMyRegister } from './types'
 
 export type TAppState = {
   currentUser?: ICurrentUser
-  myCourses?: IMyApplyCourse[]
+  myRegisters?: IMyRegister[]
   loginDialogVisible: boolean
 }
 
 type Action =
   | { type: 'LOGIN'; payload: ICurrentUser }
   | { type: 'LOGOUT' }
-  | { type: 'UPDATE_MY_COURSES'; payload?: IMyApplyCourse[] }
+  | { type: 'UPDATE_MY_COURSES'; payload?: IMyRegister[] }
   | { type: 'UPDATE_LOGIN_DIALOG_VISIBLE'; payload: boolean }
 
 const rootReducer = (state: TAppState, action: Action) => {
@@ -24,7 +24,7 @@ const rootReducer = (state: TAppState, action: Action) => {
       return { ...state, currentUser: undefined }
     }
     case 'UPDATE_MY_COURSES': {
-      return { ...state, myCourses: action.payload }
+      return { ...state, myRegisters: action.payload }
     }
     case 'UPDATE_LOGIN_DIALOG_VISIBLE': {
       return { ...state, loginDialogVisible: action.payload }
@@ -37,7 +37,7 @@ const rootReducer = (state: TAppState, action: Action) => {
 
 const initialState: TAppState = {
   currentUser: { phone: localStorage.getItem(USER_INFO_STORAGE_KEY) },
-  myCourses: [],
+  myRegisters: [],
   loginDialogVisible: false
 }
 const defaultDispatch: React.Dispatch<Action> = () => initialState // we never actually use this

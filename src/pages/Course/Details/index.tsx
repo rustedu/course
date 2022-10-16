@@ -3,21 +3,21 @@ import { last, groupBy, keys, sortBy, find } from 'lodash'
 import { useParams } from 'react-router-dom'
 import Tabs from '../../../components/Tabs'
 import RegisterModal from '../../../components/RegisterModal'
-import { useAppState } from '../../../context'
+import { useAppState } from '../../../hooks'
 import { RoleNameMap } from '../../../constants'
 import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
 import StudentList from './StudentList'
-import { EUserType as EStudentType, IMyApplyCourse } from '../../../types'
+import { EUserType as EStudentType, IMyRegister } from '../../../types'
 import ReplayList from './ReplayList'
 
 import './index.scss'
 
 const Action = (props: {
   courseInfo: any
-  onRegisterCourse?: (newCourse: IMyApplyCourse) => void
+  onRegisterCourse?: (newCourse: IMyRegister) => void
 }) => {
   const {
-    state: { currentUser, myCourses },
+    state: { currentUser, myRegisters },
     dispatch
   } = useAppState()
   const openLoginDialog = () => {
@@ -26,7 +26,7 @@ const Action = (props: {
       payload: true
     })
   }
-  const enterCourse = (registerCourse: IMyApplyCourse) => {
+  const enterCourse = (registerCourse: IMyRegister) => {
     const { name, phone, status } = registerCourse
     const url = `https://room.rustedu.com?username=${name}&userId=${phone}&role=${
       RoleNameMap[status] || 'student'
@@ -35,7 +35,7 @@ const Action = (props: {
   }
 
   if (currentUser?.phone) {
-    const registerCourse = find(myCourses, (course) => course.phone === currentUser.phone)
+    const registerCourse = find(myRegisters, (course) => course.phone === currentUser.phone)
 
     return !!registerCourse ? (
       <button className="btn" onClick={() => enterCourse(registerCourse)}>

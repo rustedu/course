@@ -60,9 +60,6 @@ $color: red;
         display: block;
         margin-bottom: 40px;
       }
-      .title {
-        margin-bottom: 24px;
-      }
     }
 
     .organize {
@@ -87,6 +84,7 @@ $color: red;
   font-weight: 700;
   font-style: normal;
   font-size: 22px;
+  margin-bottom: 24px;
   &:before {
     content: '';
     border-left: 4px solid #0170fe;

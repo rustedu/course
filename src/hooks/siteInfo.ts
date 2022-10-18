@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getSiteConfig } from '../api'
 
-export const useSiteConfig = () => {
+export const useSiteInfo = () => {
   const [config, setConfig] = useState<any>({})
   const [loading, setLoading] = useState(true)
 
@@ -15,5 +15,5 @@ export const useSiteConfig = () => {
     init()
   }, [init])
 
-  return [config, loading]
+  return { config, loading }
 }

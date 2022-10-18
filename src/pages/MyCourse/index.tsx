@@ -11,7 +11,7 @@ import Loading from '../../components/Loading'
 
 const MyCourseList = () => {
   const [myCourses, setMyCourses] = useState<any[]>([])
-  const [total, setTotal] = useState()
+  const [total, setTotal] = useState<number>()
   const {
     state: { currentUser, myRegisters }
   } = useAppState()
@@ -60,7 +60,7 @@ const MyCourseList = () => {
             <div
               key={course.id}
               className="course-item"
-              onClick={() => navigate(`/course/${course.courseId}`)}
+              onClick={() => navigate(`/${course.courseId}`)}
             >
               <img className="course-item-cover" src={course.coverUrl} alt="cover" />
               <div className="course-item-content">

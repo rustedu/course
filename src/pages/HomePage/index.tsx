@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Spin } from 'antd'
-import { useSiteConfig } from '../../hooks'
+import { useSiteInfo } from '../../hooks'
 import CourseList from '../Course'
 import TeacharList from '../Course/TeacherList'
 
@@ -39,7 +39,7 @@ function HomePage() {
   const [tab, setTab] = useState<ETabs>(ETabs.INDEX)
   const isIndexTab = tab === ETabs.INDEX
 
-  const [siteConfig, loading] = useSiteConfig()
+  const { config, loading } = useSiteInfo()
 
   const renderMainContent = () => {
     return (
@@ -59,8 +59,8 @@ function HomePage() {
     <div className="home-wrapper">
       <Spin spinning={loading}>
         <header className="home-wrapper-header">
-          <img className="intro-cover" src={siteConfig.coverUrl} alt="site-cover" />
-          <img src={siteConfig.consultUrl} alt="logo-mark" className="logo-mark" />
+          <img className="intro-cover" src={config.coverUrl} alt="site-cover" />
+          <img src={config.consultUrl} alt="logo-mark" className="logo-mark" />
           <ul className="nav">
             {nav.map((item) => (
               <li
@@ -79,8 +79,8 @@ function HomePage() {
           <section className={setTabClassName(isIndexTab || tab === ETabs.ABOUT)}>
             <div className="title">机构介绍</div>
             <div className="organize">
-              <div className="intro">{siteConfig.aboutUsInfo}</div>
-              <img src={siteConfig.aboutUsImgUrl} alt="organize-logo" className="organize-logo" />
+              <div className="intro">{config.aboutUsInfo}</div>
+              <img src={config.aboutUsImgUrl} alt="organize-logo" className="organize-logo" />
             </div>
           </section>
         </main>

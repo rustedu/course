@@ -129,14 +129,14 @@ const RegisterForm = (props: {
 const RegisterModal = (props: IProps) => {
   const [visible, setVisible] = useState(props.defaultVisible)
   const {
-    state: { myCourses },
+    state: { myRegisters },
     dispatch
   } = useAppState()
 
   const handleSubmit = (newCourse: IMyRegister) => {
     dispatch({
       type: 'UPDATE_MY_COURSES',
-      payload: (myCourses || []).concat(newCourse)
+      payload: (myRegisters || []).concat(newCourse)
     })
     props.onRegisterCourse?.(newCourse)
     setVisible(false)

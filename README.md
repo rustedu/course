@@ -19,3 +19,12 @@
   2. yarn install
 
   3. yarn dev
+
+
+### custumize site information
+
+edit __site.config.json__ file for your need
+
+### gh-pages setting
+
+you could deploy your site on github page simply by setting a action environment variable.

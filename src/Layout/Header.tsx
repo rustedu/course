@@ -6,13 +6,13 @@ const Header = () => {
   return (
     <header>
       <div className="header-content content">
-        <div className="logo-area" onClick={() => navigate('/')}>
+        <div className="logo-area" onClick={() => navigate('//')}>
           <img src={siteConfig.logo} alt="logo" />
           <span className="logo-content">{siteConfig.title}</span>
         </div>
 
         <div className="actions">
-          <Link to="/">
+          <Link to="//">
             <span className="action-item">首页</span>
           </Link>
           <LoginStatus />

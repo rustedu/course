@@ -103,7 +103,8 @@ $footer-height: 210px;
             display: flex;
             flex-direction: column;
             & > div {
-              span {
+              a {
+                color: #909090;
                 position: relative;
                 cursor: pointer;
                 &:after {

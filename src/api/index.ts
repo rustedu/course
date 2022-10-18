@@ -1,7 +1,7 @@
 import request from '../utils/request'
 import type { IMyRegister } from '../types'
 
-const CLIENT_ID = 385
+const CLIENT_ID = siteConfig.clientId
 const PAGE_SIZE = 2000
 
 export async function getSiteConfig() {

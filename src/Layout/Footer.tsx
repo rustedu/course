@@ -1,4 +1,4 @@
-import React from 'react'
+import { map } from 'lodash'
 
 const Footer = () => {
   return (
@@ -6,33 +6,32 @@ const Footer = () => {
       <div className="content">
         <div className="footer-info">
           <section>
-            <div className="sub-title">开源操作系统培训</div>
+            <div className="sub-title">{siteConfig.title}</div>
             <div className="sub-items">
-              <span>促进操作系统的教学、研究与产业的发展</span>
+              <span>{siteConfig.subTitle}</span>
             </div>
           </section>
 
           <section>
             <div className="sub-title">资源链接</div>
             <div className="sub-items">
-              <div>
-                <span> Rust基础教程</span>
-              </div>
-              <div>
-                <span> 清华rCore操作系统实践教程</span>
-              </div>
-              <div>
-                <span> 全国大学生操作系统设计大赛</span>
-              </div>
+              {map(siteConfig.footer.resources, ({ text, link }) => (
+                <div key={link}>
+                  <a href={link}>{text}</a>
+                </div>
+              ))}
             </div>
           </section>
 
           <section>
             <div className="sub-title">联系我们</div>
             <div className="sub-items">
-              <div>电话：13691584139</div>
-              <div>邮箱：hello@maodou.io</div>
-              <div>地址：北京市海淀区清华科技园科技大厦C座G05</div>
+              {map(siteConfig.footer.contact, ({ label, text }) => (
+                <div key={label}>
+                  <span>{label}：</span>
+                  {text}
+                </div>
+              ))}
             </div>
           </section>
         </div>

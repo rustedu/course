@@ -7,9 +7,8 @@ const Header = () => {
     <header>
       <div className="header-content content">
         <div className="logo-area" onClick={() => navigate('/')}>
-          <img src="/img/logo.png" alt="logo" />
-          <span className="logo-key">rCore</span>
-          <span className="logo-content">开源操作系统培训</span>
+          <img src={siteConfig.logo} alt="logo" />
+          <span className="logo-content">{siteConfig.title}</span>
         </div>
 
         <div className="actions">

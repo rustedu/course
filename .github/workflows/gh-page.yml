@@ -21,15 +21,12 @@ jobs:
         run: |
           npm install yarn -g
           yarn install
-      - name: create env file
-        run: |
-          echo VITE_API_BASE_URL=${{ secrets.API_URL }} >> .env
       - name: build pages
         run: yarn build
       - name: GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3.0.0
         with:
           target_branch: gh-pages
-          build_dir: dist
+          build_dir: docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

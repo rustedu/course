@@ -58,6 +58,12 @@ $footer-height: 210px;
           color: #ff589e;
         }
       }
+      .user-info {
+        display: inline-flex;
+        flex-direction: row;
+        gap: 6px;
+        align-items: center;
+      }
     }
   }
 

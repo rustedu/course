@@ -143,9 +143,9 @@ const LoginStatus = () => {
   )
   return (
     <Dropdown overlayClassName="user-dropdown-menus" overlay={menu} placement="bottomRight" arrow>
-      <span className="not-link">
-        <img width={30} src={DETAULT_USER_AVATAR} alt="avatar" />
+      <span className="user-info not-link">
         {currentUser.phone}
+        <img width={30} src={DETAULT_USER_AVATAR} alt="avatar" />
       </span>
     </Dropdown>
   )

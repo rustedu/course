@@ -158,7 +158,7 @@ const CourseDetail = () => {
         </div>
         <div className="share-area">
           <div className="share-box">
-            <img src="/img/share.png" alt="share" />
+            <img src="img/share.png" alt="share" />
             <span>分享二维码,</span>
             <span>邀请好友报名</span>
           </div>

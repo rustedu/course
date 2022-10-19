@@ -47,7 +47,7 @@ const StudentList = (props: { data?: any[] }) => {
                   {student.status !== EUserType.STUDENT && (
                     <img
                       height="14"
-                      src={`/img/${iconMap[student.status]}`}
+                      src={`img/${iconMap[student.status]}`}
                       alt="student-status-png"
                     ></img>
                   )}

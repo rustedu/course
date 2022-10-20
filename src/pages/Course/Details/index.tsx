@@ -30,7 +30,7 @@ const Action = (props: {
   }
   const enterCourse = (registerCourse: IMyRegister) => {
     const { name, phone, status } = registerCourse
-    const url = `https://room.rustedu.com?username=${name}&userId=${phone}&role=${
+    const url = `https://room.os2edu.cn?username=${name}&userId=${phone}&role=${
       RoleNameMap[status] || 'student'
     }&roomId=${props.courseInfo.roomId}&video=${props.courseInfo.ishd || '480p'}`
     window.open(url)

@@ -1,4 +1,5 @@
-$header-height: 58px;
+$header-height: 62px;
+$menu-icon-size: 32px;
 
 .container-mobile {
   height: 100vh;
@@ -13,6 +14,33 @@ $header-height: 58px;
     left: 0;
     right: 0;
     height: $header-height;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      align-items: center;
+      a,
+      span {
+        letter-spacing: 2px;
+        color: #333;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .icon {
+          border: 1px solid rgb(234, 234, 234);
+          display: inline-block;
+          padding: 4px;
+          width: $menu-icon-size;
+          height: $menu-icon-size;
+          border-radius: 50%;
+        }
+      }
+      img {
+        width: $menu-icon-size;
+        border-radius: 50%;
+      }
+    }
   }
   & > main {
     width: 100%;
@@ -20,6 +48,7 @@ $header-height: 58px;
     height: 100%;
     overflow: auto;
     height: calc(100% - #{$header-height});
+    background: rgb(246, 246, 246);
     & > .content {
       padding: 0;
     }
@@ -33,6 +62,7 @@ $header-height: 58px;
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 10px;
+        margin-bottom: 0;
         section {
           .sub-title {
             font-size: 14px;
@@ -59,7 +89,7 @@ $header-height: 58px;
         flex-direction: row;
         justify-content: center;
         padding: 0;
-        background-color: rgb(248, 248, 248);
+        background-color: #fff;
         li {
           border-bottom: none;
           letter-spacing: 2px;
@@ -80,7 +110,7 @@ $header-height: 58px;
           grid-template-columns: repeat(2, 1fr);
           gap: 18px 10px;
           .course-item {
-            border: 8px;
+            border-radius: 6px;
             &-info {
               padding: 4px;
               .info-title {
@@ -144,6 +174,56 @@ $header-height: 58px;
           padding: 0 14px;
           height: 200px;
           overflow: auto;
+        }
+      }
+    }
+  }
+
+  .mycourse-list-wrapper {
+    & > header {
+      height: 48px;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+    }
+    .totol-register-count {
+      font-size: 14px;
+      top: 10px;
+      right: 12px;
+    }
+    .mycourse-list {
+      margin-top: 10px;
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 10px;
+      .course-item {
+        border-radius: 6px;
+        img {
+          border-bottom: 1px solid rgb(234, 234, 234);
+        }
+        .course-item-content {
+          padding: 10px;
+          h3 {
+            padding: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            margin-bottom: 8px;
+          }
+          .summary,
+          .room {
+            max-width: unset;
+          }
+          .room {
+            display: flex;
+            height: unset;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 12px;
+            gap: 6px;
+          }
         }
       }
     }

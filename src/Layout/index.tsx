@@ -9,9 +9,10 @@ import './index-mobile.scss'
 const Layout = () => {
   const md = useDeviceDetect()
   useFetchMyRegister()
+  const isMobile = !!md?.mobile()
   return (
-    <div className={`container ${md?.mobile() ? 'container-mobile' : ''}`}>
-      <Header />
+    <div className={`container ${isMobile ? 'container-mobile' : ''}`}>
+      <Header isMobile={isMobile} />
       <main>
         <div className="content">
           <Outlet />

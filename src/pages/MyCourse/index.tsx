@@ -46,36 +46,42 @@ const MyCourseList = () => {
 
   return (
     <div className="mycourse-list-wrapper">
-      <div className="title">我的课程</div>
+      <header>
+        <div className="title">我的课程</div>
 
-      <div className="totol-register-count">
-        共报名课程: <strong>{total}</strong>
-      </div>
+        <div className="totol-register-count">
+          共报名课程: <strong>{total}</strong>
+        </div>
+      </header>
 
       {total === undefined ? (
         <Loading />
       ) : (
         <div className="mycourse-list">
-          {map(myCourses, (course: any) => (
+          {map(myCourses, (course: any, index) => (
             <div
-              key={course.id}
+              key={course.id + course.courseIndex + course.title + index}
               className="course-item"
               onClick={() => navigate(`/${course.courseId}`)}
             >
               <img className="course-item-cover" src={course.coverUrl} alt="cover" />
               <div className="course-item-content">
-                <h3>{course.title}</h3>
-                <div className="summary">{course.summary}</div>
-                <div className="room">教室号: {course.roomId}</div>
-                <button
-                  className="btn"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    enterClass(course)
-                  }}
-                >
-                  进入课堂
-                </button>
+                <div>
+                  <h3>{course.title}</h3>
+                  <div className="summary">{course.summary}</div>
+                </div>
+                <div className="room">
+                  <span> 教室号: {course.roomId} </span>
+                  <button
+                    className="btn enter-class-btn"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      enterClass(course)
+                    }}
+                  >
+                    进入课堂
+                  </button>
+                </div>
               </div>
             </div>
           ))}

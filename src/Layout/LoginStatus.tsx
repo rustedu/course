@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Dropdown, Menu, Modal, Form, Input, Button, message } from 'antd'
 import { USER_INFO_STORAGE_KEY, DETAULT_USER_AVATAR } from '../constants'
 import VerificationCode, { VerificationCodeNum } from '../components/VerificationCode'
+import Icon from '@/components/Icon'
 import { useAppState } from '../hooks'
 
 const PhoneRegex = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
@@ -63,7 +64,7 @@ const LoginForm = (props: { onSubmit: (phone: string) => void | Promise<boolean>
     </Form>
   )
 }
-const LoginStatus = () => {
+const LoginStatus = ({ isMobile }: { isMobile?: boolean }) => {
   const {
     state: { currentUser, loginDialogVisible },
     dispatch
@@ -108,7 +109,11 @@ const LoginStatus = () => {
   if (!currentUser?.phone) {
     return (
       <>
-        <span onClick={() => setLoginVisible(true)}>登录</span>
+        {isMobile ? (
+          <Icon symbol="icon-user" onClick={() => setLoginVisible(true)} />
+        ) : (
+          <span onClick={() => setLoginVisible(true)}>登录</span>
+        )}
         <Modal
           width={350}
           open={loginDialogVisible}
@@ -143,10 +148,14 @@ const LoginStatus = () => {
   )
   return (
     <Dropdown overlayClassName="user-dropdown-menus" overlay={menu} placement="bottomRight" arrow>
-      <span className="user-info not-link">
-        {currentUser.phone}
-        <img width={30} src={DETAULT_USER_AVATAR} alt="avatar" />
-      </span>
+      {isMobile ? (
+        <Icon symbol="icon-user" />
+      ) : (
+        <span className="user-info not-link">
+          {currentUser.phone}
+          <img width={30} src={DETAULT_USER_AVATAR} alt="avatar" />
+        </span>
+      )}
     </Dropdown>
   )
 }

@@ -1,30 +1,33 @@
-import React from 'react'
+import { useState } from 'react'
 import { map } from 'lodash'
+import VideoReplayer from '@/components/VideoReplayer'
+import { getReplayerChatHistory } from '@/api'
+
+const headers = ['教室号', '课程名称', '开始时间', '上课地点', '备注', '录像回放']
 
 const ReplayList = (props: { data?: any[] }) => {
+  const [currentReplay, setReplay] = useState<any>()
+  const [chatHistoryMap, setChatHistoryMap] = useState<Record<string, any>>({})
+
+  const openReplay = async (replay: any) => {
+    const { choseUrl, roomId, startAt: startTime, endAt: endTime } = replay
+    setReplay({ url: choseUrl, startTime, endTime })
+    if (!chatHistoryMap[choseUrl]) {
+      const res = await getReplayerChatHistory({ roomId, startTime, endTime })
+      setChatHistoryMap({ ...chatHistoryMap, [choseUrl]: res })
+    }
+  }
+
   return (
     <div className="list-wrap">
       <table cellSpacing="0" cellPadding="0">
         <thead>
           <tr>
-            <th>
-              <span>教室号</span>
-            </th>
-            <th>
-              <span>课程名称</span>
-            </th>
-            <th>
-              <span>开始时间</span>
-            </th>
-            <th>
-              <span>上课地点</span>
-            </th>
-            <th>
-              <span>备注</span>
-            </th>
-            <th>
-              <span>进入课程</span>
-            </th>
+            {headers.map((h) => (
+              <th key={h}>
+                <span>{h}</span>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -39,14 +42,21 @@ const ReplayList = (props: { data?: any[] }) => {
               <td>{replay.location}</td>
               <td>{replay.remark}</td>
               <td>
-                <a href={replay.choseUrl} target="_blank">
+                {/* href={replay.choseUrl} target="_blank" */}
+                <span className="player-btn" onClick={() => openReplay(replay)}>
                   观看
-                </a>
+                </span>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <VideoReplayer
+        url={currentReplay?.url}
+        startTime={currentReplay?.startTime}
+        chat={chatHistoryMap[currentReplay?.url || '']}
+        onClose={() => setReplay('')}
+      />
     </div>
   )
 }

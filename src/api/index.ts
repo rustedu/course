@@ -91,3 +91,26 @@ export async function getMyRegisters(phone: string) {
   })
   return res
 }
+
+export async function getReplayerChatHistory(params: {
+  roomId: string
+  startTime: string
+  endTime: string
+}) {
+  const { roomId, startTime, endTime } = params
+  const res = await request<never, { totalNum: number; roomActionList: any[] }>(
+    '/analysis/api/room-actions/getRoomActionsWithTotalNumByConditionsTime',
+    {
+      params: {
+        roomId,
+        startTime: new Date(startTime).toJSON(),
+        endTime: new Date(endTime).toJSON(),
+        clientId: CLIENT_ID,
+        page: 0,
+        size: 200,
+        actionType: 'CHAT'
+      }
+    }
+  )
+  return res
+}

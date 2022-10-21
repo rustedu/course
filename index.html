@@ -11,6 +11,25 @@
   <body>
     <div id="root"></div>
 
+    <!-- Start Setting H5 meta for responsive -->
+    <script type="text/javascript">
+      function initViewport() {
+        const width = 375;  // 设计稿宽度
+        const scale = (window.innerWidth / width).toFixed(2)
+        // console.log('scale', scale)
+        let meta = document.querySelector('meta[name=viewport]')
+        let content = `width=${width}, init-scale=${scale}, user-scalable=no`
+        if(!meta) {
+            meta = document.createElement('meta')
+            meta.setAttribute('name', 'viewport')
+            document.head.appendChild(meta)
+        }
+        meta.setAttribute('content', content)
+      }
+      initViewport()
+    </script>
+    <!-- END Setting H5 meta for responsive -->
+  
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages

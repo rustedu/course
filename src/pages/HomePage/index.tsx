@@ -60,7 +60,7 @@ function HomePage() {
       <Spin spinning={loading}>
         <header className="home-wrapper-header">
           <img className="intro-cover" src={config.coverUrl} alt="site-cover" />
-          <img src={config.consultUrl} alt="logo-mark" className="logo-mark" />
+          <img className="logo-mark" src={config.consultUrl} alt="logo-mark" />
           <ul className="nav">
             {nav.map((item) => (
               <li

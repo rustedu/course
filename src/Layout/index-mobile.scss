@@ -1,0 +1,161 @@
+$header-height: 58px;
+
+.container-mobile {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+
+  /** 布局样式 */
+  & > header {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: $header-height;
+  }
+  & > main {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+    height: calc(100% - #{$header-height});
+    & > .content {
+      padding: 0;
+    }
+    & > footer {
+      width: 100%;
+      height: fit-content;
+      background: #e9e9e9;
+      padding: 0 10px;
+      padding-top: 20px;
+      .footer-info {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        section {
+          .sub-title {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  /** 首页移动端样式 */
+  .home-wrapper {
+    &-header {
+      .intro-cover {
+        height: 220px;
+      }
+
+      .logo-mark {
+        display: none;
+      }
+
+      .nav {
+        height: 52px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0;
+        background-color: rgb(248, 248, 248);
+        li {
+          border-bottom: none;
+          letter-spacing: 2px;
+          font-size: 15px;
+          &.active {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    &-content {
+      padding: 10px 12px;
+      .tab-show {
+        margin-bottom: 20px;
+        .course-list {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 18px 10px;
+          .course-item {
+            border: 8px;
+            &-info {
+              padding: 4px;
+              .info-title {
+                font-size: 14px;
+              }
+              .summary {
+                font-size: 12px;
+              }
+            }
+            & > footer {
+              padding: 0 10px;
+              .apply-num {
+                font-size: 12px;
+              }
+              .apply-price {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+
+        .organize {
+          display: flex;
+          flex-direction: column-reverse;
+          border: 1px solid #eaeaea;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          .organize-logo {
+            margin-left: 0;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #eaeaea;
+          }
+
+          .intro {
+            font-size: 14px;
+            padding: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  .teachar-recommand {
+    gap: 10px;
+    .teachar-intro {
+      display: flex;
+      flex-direction: column;
+      height: unset;
+      padding: 10px 0;
+      border-radius: 8px;
+      .info {
+        margin-left: 0;
+        .teachar-title {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          margin: 4px 0 10px;
+        }
+        .teach-intro {
+          padding: 0 14px;
+          height: 200px;
+          overflow: auto;
+        }
+      }
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-left: 4px;
+    &:before {
+      content: none;
+    }
+  }
+}

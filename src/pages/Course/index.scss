@@ -26,6 +26,10 @@
         font-weight: 400;
         font-size: 20px;
         line-height: 32px;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .summary {
         color: #909090;

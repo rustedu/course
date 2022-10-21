@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import { useDeviceDetect, useFetchMyRegister } from '../hooks'
@@ -7,9 +7,14 @@ import './index.scss'
 import './index-mobile.scss'
 
 const Layout = () => {
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
+
   const md = useDeviceDetect()
-  useFetchMyRegister()
   const isMobile = !!md?.mobile()
+
+  useFetchMyRegister()
+
   return (
     <div className={`container ${isMobile ? 'container-mobile' : ''}`}>
       <Header isMobile={isMobile} />
@@ -17,7 +22,7 @@ const Layout = () => {
         <div className="content">
           <Outlet />
         </div>
-        <Footer />
+        {isHomePage && <Footer />}
       </main>
     </div>
   )

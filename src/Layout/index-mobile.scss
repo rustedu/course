@@ -154,6 +154,76 @@ $menu-icon-size: 32px;
     }
   }
 
+  $course-detail-cover-height: 260px;
+  .course-detail-wrapper {
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      height: unset;
+      margin-bottom: 10px;
+      .course-cover {
+        width: 100%;
+        height: $course-detail-cover-height;
+        object-fit: cover;
+        border-radius: 0;
+        border: none;
+        overflow: hidden;
+      }
+      .course-main-info {
+        margin-left: 0;
+        padding: 10px;
+        background-color: #fff;
+        margin-bottom: 10px;
+        .course-title {
+          margin-bottom: 10px;
+          font-size: 16px;
+        }
+        .course-info {
+          display: flex;
+          gap: 20px;
+        }
+        .course-info-item {
+          &-label {
+            color: #aaa;
+          }
+          margin: 0;
+          font-size: 14px;
+          margin-bottom: 6px;
+        }
+        .course-price {
+          position: absolute;
+          top: 8px;
+          right: 75px;
+          font-size: 18px !important;
+        }
+        .course-actions {
+          position: unset;
+
+          .btn {
+            margin: 8px auto;
+            height: 32px;
+            width: 100%;
+          }
+        }
+      }
+
+      .share-icon {
+        position: absolute;
+        top: $course-detail-cover-height + 8px;
+        right: 16px;
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #f3f3f3;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+      }
+    }
+  }
+
   .teachar-recommand {
     gap: 10px;
     .teachar-intro {
@@ -236,6 +306,88 @@ $menu-icon-size: 32px;
     margin-left: 4px;
     &:before {
       content: none;
+    }
+  }
+  .list-mobile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .list-item {
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px 12px;
+      &-index {
+        width: 26px;
+        color: #ccc;
+      }
+      &-main-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        .info-name {
+          font-size: 14px;
+          font-weight: bold;
+
+          img {
+            margin-left: 6px;
+            transform: translateY(-1px);
+          }
+          .location-tag {
+            display: inline-flex;
+            padding: 0 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+            color: #389e0d;
+            background: #f6ffed;
+            border: 1px solid #b7eb8f;
+            font-size: 12px;
+            font-weight: unset;
+          }
+        }
+        .current-bg {
+          font-size: 12px;
+        }
+        .list-item-label {
+          color: #bbb;
+          margin-right: 2px;
+        }
+      }
+      &-gender {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        margin: 0 6px;
+        color: #fff;
+        &.man {
+          background-color: rgba(0, 134, 255, 0.6);
+        }
+        &.woman {
+          background-color: rgba(255, 68, 137, 0.6);
+        }
+      }
+      &-tag {
+        width: 110px;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &-actions {
+        .icon {
+          font-size: 26px;
+          color: #1890ff;
+        }
+      }
     }
   }
 }

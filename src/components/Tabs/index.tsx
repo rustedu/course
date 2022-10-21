@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import './index-mobile.scss'
 import './index.scss'
 
 interface IPane {

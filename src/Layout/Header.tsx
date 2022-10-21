@@ -14,7 +14,7 @@ const Header = ({ isMobile }: { isMobile?: boolean }) => {
           </a>
           <span onClick={() => navigate('//')}>
             <Icon symbol="icon-home" />
-            Home
+            首页
           </span>
           <span>
             <LoginStatus isMobile={isMobile} />

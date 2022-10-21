@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { last, groupBy, keys, sortBy, find } from 'lodash'
+import { Popover } from 'antd'
 import { useParams } from 'react-router-dom'
 import { EUserType as EStudentType, IMyRegister } from '../../../types'
 import Tabs from '../../../components/Tabs'
 import Loading from '../../../components/Loading'
+import Icon from '../../../components/Icon'
 import RegisterModal from '../../../components/RegisterModal'
-import { useAppState } from '../../../hooks'
+import { useAppState, useDeviceDetect } from '../../../hooks'
 import { RoleNameMap } from '../../../constants'
 import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
 import StudentList from './StudentList'
@@ -13,6 +15,15 @@ import ReplayList from './ReplayList'
 
 import './index.scss'
 
+const Share = () => {
+  return (
+    <div className="share-box">
+      <img src="img/share.png" alt="share" />
+      <span>分享二维码,</span>
+      <span>邀请好友报名</span>
+    </div>
+  )
+}
 const Action = (props: {
   courseInfo: any
   onRegisterCourse?: (newCourse: IMyRegister) => void
@@ -56,6 +67,7 @@ const Action = (props: {
 const CourseDetail = () => {
   const [courseInfo, setCourseInfo] = useState<any>({})
   const [students, setStudents] = useState<any[]>([])
+  const md = useDeviceDetect()
   const detailRef = useRef<
     Partial<{
       applyStudents: any[]
@@ -146,9 +158,15 @@ const CourseDetail = () => {
         <div className="course-main-info">
           <div className="course-title">{courseInfo.title}</div>
 
-          <div className="course-info-item">任课教师: {detailRef.current.teacher?.name}</div>
-          <div className="course-info-item">
-            学生人数: {detailRef.current.applyStudents?.length} 人
+          <div className="course-info">
+            <div className="course-info-item">
+              <span className="course-info-item-label">任课教师: </span>
+              {detailRef.current.teacher?.name}
+            </div>
+            <div className="course-info-item">
+              <span className="course-info-item-label">学生人数: </span>
+              {detailRef.current.applyStudents?.length} 人
+            </div>
           </div>
 
           <div className="course-actions">
@@ -156,16 +174,20 @@ const CourseDetail = () => {
             <Action courseInfo={courseInfo} onRegisterCourse={handleRegister} />
           </div>
         </div>
-        <div className="share-area">
-          <div className="share-box">
-            <img src="img/share.png" alt="share" />
-            <span>分享二维码,</span>
-            <span>邀请好友报名</span>
-          </div>
-          {/* <div className="share-box">
+        {!!md?.mobile() ? (
+          <Popover placement="leftTop" content={<Share />} trigger="click">
+            <span className="share-icon">
+              <Icon symbol="icon-share" />
+            </span>
+          </Popover>
+        ) : (
+          <div className="share-area">
+            <Share />
+            {/* <div className="share-box">
             <img src="/img/minipro.jpeg" alt="mini" />
           </div> */}
-        </div>
+          </div>
+        )}
       </section>
 
       <section className="course-intro">

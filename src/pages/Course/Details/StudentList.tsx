@@ -1,6 +1,8 @@
 import { map, isEmpty } from 'lodash'
 import { Empty } from 'antd'
 import { EUserType } from '../../../types'
+import Icon from '@/components/Icon'
+import { useDeviceDetect } from '@/hooks'
 
 import './StudentList.scss'
 
@@ -11,6 +13,8 @@ const iconMap: Record<string, string> = {
 }
 
 const StudentList = (props: { data?: any[] }) => {
+  const md = useDeviceDetect()
+
   if (isEmpty(props.data)) {
     return (
       <div className="studentlist-wrap">
@@ -18,6 +22,46 @@ const StudentList = (props: { data?: any[] }) => {
       </div>
     )
   }
+
+  if (!!md?.mobile()) {
+    return (
+      <div className="list-mobile">
+        {map(props.data, (student, index) => (
+          <div key={student.id} className="list-item">
+            <div className="list-item-index">{index + 1}</div>
+            <div className="list-item-main-info">
+              <div className="info-name">
+                {student.name}
+                {student.status !== EUserType.STUDENT && (
+                  <img
+                    height="14"
+                    src={`img/${iconMap[student.status]}`}
+                    alt="student-status-png"
+                  ></img>
+                )}
+              </div>
+
+              <div className="info-other">
+                <span className="current-bg">
+                  <span className="list-item-label">职业:</span> {student.age}{' '}
+                </span>
+              </div>
+            </div>
+
+            <div className={`list-item-gender ${student.gender === '女' ? 'woman' : 'man'}`}>
+              {student.gender === '女' ? (
+                <Icon symbol="icon-nv" />
+              ) : (
+                <Icon symbol="icon-xingbienan" />
+              )}
+            </div>
+            <div className="list-item-tag">{student.tag}</div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   return (
     <div className="list-wrap">
       <table cellSpacing="0" cellPadding="0">

@@ -47,19 +47,6 @@
       flex-direction: column;
       align-items: center;
       gap: 20px;
-
-      .share-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        & > span {
-          font-size: 12px;
-        }
-        img {
-          width: 116px;
-          height: 116px;
-        }
-      }
     }
   }
   .course-intro {
@@ -78,5 +65,18 @@
   cursor: pointer;
   &:hover {
     color: #ff589e;
+  }
+}
+
+.share-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > span {
+    font-size: 12px;
+  }
+  img {
+    width: 116px;
+    height: 116px;
   }
 }

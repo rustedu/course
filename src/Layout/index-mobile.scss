@@ -1,0 +1,393 @@
+$header-height: 62px;
+$menu-icon-size: 32px;
+
+.container-mobile {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+
+  /** 布局样式 */
+  & > header {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: $header-height;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      align-items: center;
+      a,
+      span {
+        letter-spacing: 2px;
+        color: #333;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .icon {
+          border: 1px solid rgb(234, 234, 234);
+          display: inline-block;
+          padding: 4px;
+          width: $menu-icon-size;
+          height: $menu-icon-size;
+          border-radius: 50%;
+        }
+      }
+      img {
+        width: $menu-icon-size;
+        border-radius: 50%;
+      }
+    }
+  }
+  & > main {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+    height: calc(100% - #{$header-height});
+    background: rgb(246, 246, 246);
+    & > .content {
+      padding: 0;
+    }
+    & > footer {
+      width: 100%;
+      height: fit-content;
+      background: #e9e9e9;
+      padding: 0 10px;
+      padding-top: 20px;
+      .footer-info {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        margin-bottom: 0;
+        section {
+          .sub-title {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  /** 首页移动端样式 */
+  .home-wrapper {
+    &-header {
+      .intro-cover {
+        height: 220px;
+      }
+
+      .logo-mark {
+        display: none;
+      }
+
+      .nav {
+        height: 52px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0;
+        background-color: #fff;
+        li {
+          border-bottom: none;
+          letter-spacing: 2px;
+          font-size: 15px;
+          &.active {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    &-content {
+      padding: 10px 12px;
+      .tab-show {
+        margin-bottom: 20px;
+        .course-list {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 18px 10px;
+          .course-item {
+            border-radius: 6px;
+            &-info {
+              padding: 4px;
+              .info-title {
+                font-size: 14px;
+              }
+              .summary {
+                font-size: 12px;
+              }
+            }
+            & > footer {
+              padding: 0 10px;
+              .apply-num {
+                font-size: 12px;
+              }
+              .apply-price {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+
+        .organize {
+          display: flex;
+          flex-direction: column-reverse;
+          border: 1px solid #eaeaea;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          .organize-logo {
+            margin-left: 0;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #eaeaea;
+          }
+
+          .intro {
+            font-size: 14px;
+            padding: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  $course-detail-cover-height: 260px;
+  .course-detail-wrapper {
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      height: unset;
+      margin-bottom: 10px;
+      .course-cover {
+        width: 100%;
+        height: $course-detail-cover-height;
+        object-fit: cover;
+        border-radius: 0;
+        border: none;
+        overflow: hidden;
+      }
+      .course-main-info {
+        margin-left: 0;
+        padding: 10px;
+        background-color: #fff;
+        margin-bottom: 10px;
+        .course-title {
+          margin-bottom: 10px;
+          font-size: 16px;
+        }
+        .course-info {
+          display: flex;
+          gap: 20px;
+        }
+        .course-info-item {
+          &-label {
+            color: #aaa;
+          }
+          margin: 0;
+          font-size: 14px;
+          margin-bottom: 6px;
+        }
+        .course-price {
+          position: absolute;
+          top: 8px;
+          right: 75px;
+          font-size: 18px !important;
+        }
+        .course-actions {
+          position: unset;
+
+          .btn {
+            margin: 8px auto;
+            height: 32px;
+            width: 100%;
+          }
+        }
+      }
+
+      .share-icon {
+        position: absolute;
+        top: $course-detail-cover-height + 8px;
+        right: 16px;
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #f3f3f3;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .teachar-recommand {
+    gap: 10px;
+    .teachar-intro {
+      display: flex;
+      flex-direction: column;
+      height: unset;
+      padding: 10px 0;
+      border-radius: 8px;
+      .info {
+        margin-left: 0;
+        .teachar-title {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          margin: 4px 0 10px;
+        }
+        .teach-intro {
+          padding: 0 14px;
+          height: 200px;
+          overflow: auto;
+        }
+      }
+    }
+  }
+
+  .mycourse-list-wrapper {
+    & > header {
+      height: 48px;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+    }
+    .totol-register-count {
+      font-size: 14px;
+      top: 10px;
+      right: 12px;
+    }
+    .mycourse-list {
+      margin-top: 10px;
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 10px;
+      .course-item {
+        border-radius: 6px;
+        img {
+          border-bottom: 1px solid rgb(234, 234, 234);
+        }
+        .course-item-content {
+          padding: 10px;
+          h3 {
+            padding: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            margin-bottom: 8px;
+          }
+          .summary,
+          .room {
+            max-width: unset;
+          }
+          .room {
+            display: flex;
+            height: unset;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 12px;
+            gap: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-left: 4px;
+    &:before {
+      content: none;
+    }
+  }
+  .list-mobile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .list-item {
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px 12px;
+      &-index {
+        width: 26px;
+        color: #ccc;
+      }
+      &-main-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        .info-name {
+          font-size: 14px;
+          font-weight: bold;
+
+          img {
+            margin-left: 6px;
+            transform: translateY(-1px);
+          }
+          .location-tag {
+            display: inline-flex;
+            padding: 0 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+            color: #389e0d;
+            background: #f6ffed;
+            border: 1px solid #b7eb8f;
+            font-size: 12px;
+            font-weight: unset;
+          }
+        }
+        .current-bg {
+          font-size: 12px;
+        }
+        .list-item-label {
+          color: #bbb;
+          margin-right: 2px;
+        }
+      }
+      &-gender {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        margin: 0 6px;
+        color: #fff;
+        &.man {
+          background-color: rgba(0, 134, 255, 0.6);
+        }
+        &.woman {
+          background-color: rgba(255, 68, 137, 0.6);
+        }
+      }
+      &-tag {
+        width: 110px;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &-actions {
+        .icon {
+          font-size: 26px;
+          color: #1890ff;
+        }
+      }
+    }
+  }
+}

@@ -7,9 +7,38 @@
     <title>rCore 开源社区 - 课程</title>
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+    <script src="https://at.alicdn.com/t/c/font_3704886_8n31at179ou.js"></script>
+    <style type="text/css">
+      .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Start Setting H5 meta for responsive -->
+    <script type="text/javascript">
+      function initViewport() {
+        const width = 375 // 设计稿宽度
+        const scale = (window.innerWidth / width).toFixed(2)
+        // console.log('scale', scale)
+        let meta = document.querySelector('meta[name=viewport]')
+        let content = `width=${width}, init-scale=${scale}, user-scalable=no`
+        if (!meta) {
+          meta = document.createElement('meta')
+          meta.setAttribute('name', 'viewport')
+          document.head.appendChild(meta)
+        }
+        meta.setAttribute('content', content)
+      }
+      initViewport()
+    </script>
+    <!-- END Setting H5 meta for responsive -->
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
@@ -23,16 +52,18 @@
       // When the single page app is loaded further down in this file,
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
-          );
+      ;(function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&')
+            })
+            .join('?')
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash)
         }
-      }(window.location))
+      })(window.location)
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
 

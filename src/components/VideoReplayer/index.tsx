@@ -8,11 +8,14 @@ import 'video.js/dist/video-js.min.css'
 import './index.scss'
 
 interface IProps {
+  title?: string
   url?: string
   startTime?: string
   chat?: { totalNum: number; roomActionList: any[] }
   onClose?: () => void
 }
+
+const PlayBackRages = [0.7, 1.0, 1.5, 2.0]
 
 const VideoReplayerModal = (props: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -22,10 +25,11 @@ const VideoReplayerModal = (props: IProps) => {
     if (!props.url) return
     if (playerRef.current) {
       playerRef.current.src(props.url)
+      playerRef.current.playbackRates(PlayBackRages)
     } else {
       if (videoRef.current) {
         const options = {
-          playbackRates: [0.7, 1.0, 1.5, 2.0]
+          playbackRates: PlayBackRages
         }
         const player = videojs(videoRef.current, options, function ready() {})
         playerRef.current = player
@@ -59,13 +63,13 @@ const VideoReplayerModal = (props: IProps) => {
   const setVideoCurrentTime = (time: string) => {
     if (props.startTime && playerRef.current) {
       const currentTime = dayjs(time).diff(dayjs(props.startTime), 'second')
-      playerRef.current.currentTime(currentTime) 
+      playerRef.current.currentTime(currentTime)
     }
   }
 
   return (
     <Modal
-      title="视频回放"
+      title={props?.title || '视频回放'}
       className="video-replay-modal"
       open={!!props.url}
       footer={null}

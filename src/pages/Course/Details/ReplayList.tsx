@@ -10,8 +10,8 @@ const ReplayList = (props: { data?: any[] }) => {
   const [chatHistoryMap, setChatHistoryMap] = useState<Record<string, any>>({})
 
   const openReplay = async (replay: any) => {
-    const { choseUrl, roomId, startAt: startTime, endAt: endTime } = replay
-    setReplay({ url: choseUrl, startTime, endTime })
+    const { choseUrl, className, roomId, startAt: startTime, endAt: endTime } = replay
+    setReplay({ url: choseUrl, className, startTime, endTime })
     if (!chatHistoryMap[choseUrl]) {
       const res = await getReplayerChatHistory({ roomId, startTime, endTime })
       setChatHistoryMap({ ...chatHistoryMap, [choseUrl]: res })
@@ -52,6 +52,7 @@ const ReplayList = (props: { data?: any[] }) => {
         </tbody>
       </table>
       <VideoReplayer
+        title={currentReplay?.className}
         url={currentReplay?.url}
         startTime={currentReplay?.startTime}
         chat={chatHistoryMap[currentReplay?.url || '']}

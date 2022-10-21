@@ -1,12 +1,16 @@
 import { useEffect, useCallback, useRef } from 'react'
+import dayjs from 'dayjs'
+import { map } from 'lodash'
 import { Modal } from 'antd'
-import videojs, { VideoJsPlayer } from 'video.js'
+import videojs from 'video.js'
 
 import 'video.js/dist/video-js.min.css'
 import './index.scss'
 
 interface IProps {
   url?: string
+  startTime?: string
+  chat?: { totalNum: number; roomActionList: any[] }
   onClose?: () => void
 }
 
@@ -23,8 +27,7 @@ const VideoReplayerModal = (props: IProps) => {
         const options = {
           playbackRates: [0.7, 1.0, 1.5, 2.0]
         }
-        const player = videojs(videoRef.current, options, function ready() {
-        })
+        const player = videojs(videoRef.current, options, function ready() {})
         playerRef.current = player
       }
     }
@@ -52,6 +55,13 @@ const VideoReplayerModal = (props: IProps) => {
       dispose()
     }
   }, [playerRef])
+
+  const setVideoCurrentTime = (time: string) => {
+    if (props.startTime && playerRef.current) {
+      const currentTime = dayjs(time).diff(dayjs(props.startTime), 'second')
+      playerRef.current.currentTime(currentTime) 
+    }
+  }
 
   return (
     <Modal
@@ -88,9 +98,26 @@ const VideoReplayerModal = (props: IProps) => {
         </div>
         <div className="replay-chat-history">
           <header>
-            <h3>聊天记录</h3>
+            <h3>聊天记录 </h3>
+            {props.chat?.totalNum && (
+              <span className="chat-total">
+                共<span>{props.chat.totalNum}</span>条
+              </span>
+            )}
           </header>
-          <main>content</main>
+          <main>
+            {map(props.chat?.roomActionList, (item) => (
+              <div key={item.id} className="chat-item">
+                <span className="chator">
+                  {item.userName}
+                  <span className="chat-time">{dayjs(item.actionTime).format('HH:mm:ss')}</span>
+                </span>
+                <pre onClick={() => setVideoCurrentTime(item.actionTime)}>
+                  {item.description.replace('TEXT:', '')}
+                </pre>
+              </div>
+            ))}
+          </main>
         </div>
       </div>
     </Modal>

@@ -13,6 +13,7 @@
   }
   .replay-chat-history {
     width: 20%;
+    height: 100%;
     background-color: #f0f0f0;
     margin-left: 20px;
     display: flex;
@@ -20,14 +21,56 @@
     & > header {
       background-color: #fff;
       height: 50px;
-      line-height: 50px;
-      padding-left: 12px;
+      padding: 0 12px;
       border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      h3 {
+        margin: 0;
+        padding: 0;
+      }
+      .chat-total {
+        letter-spacing: 1px;
+        color: darkgray;
+        & > span {
+          display: inline-block;
+          margin: 0 4px;
+          color: dimgray;
+        }
+      }
     }
     & > main {
       flex: 1;
+      // height: calc(100% - 50px);
       overflow: auto;
       padding: 8px 12px;
+      .chat-item {
+        .chator {
+          display: inline-block;
+          margin-bottom: 10px;
+          .chat-time {
+            display: inline-block;
+            margin-left: 4px;
+            color: #aaa;
+            font-size: 12px;
+            letter-spacing: 1px;
+          }
+        }
+        pre {
+          background-color: #e3e3e3;
+          opacity: 0.88;
+          padding: 8px 14px;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.3s ease 0s;
+
+          &:hover {
+            opacity: 1;
+            background-color: #ddd;
+          }
+        }
+      }
     }
   }
 }
@@ -50,6 +93,7 @@
   .ant-modal-body {
     padding: 0;
     flex: 1;
+    height: calc(100% - 55px);
   }
 }
 

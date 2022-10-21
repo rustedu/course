@@ -1,30 +1,27 @@
-import React from 'react'
+import { useState } from 'react'
 import { map } from 'lodash'
+import VideoReplayer from '@/components/VideoReplayer'
+
+const headers = ['教室号', '课程名称', '开始时间', '上课地点', '备注', '录像回放']
 
 const ReplayList = (props: { data?: any[] }) => {
+  const [replay, setReplay] = useState<string>()
+
+  const openReplay = (videoURL: string) => {
+    setReplay(videoURL)
+  }
+
+console.log(props.data)
   return (
     <div className="list-wrap">
       <table cellSpacing="0" cellPadding="0">
         <thead>
           <tr>
-            <th>
-              <span>教室号</span>
-            </th>
-            <th>
-              <span>课程名称</span>
-            </th>
-            <th>
-              <span>开始时间</span>
-            </th>
-            <th>
-              <span>上课地点</span>
-            </th>
-            <th>
-              <span>备注</span>
-            </th>
-            <th>
-              <span>进入课程</span>
-            </th>
+            {headers.map((h) => (
+              <th key={h}>
+                <span>{h}</span>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -39,14 +36,14 @@ const ReplayList = (props: { data?: any[] }) => {
               <td>{replay.location}</td>
               <td>{replay.remark}</td>
               <td>
-                <a href={replay.choseUrl} target="_blank">
-                  观看
-                </a>
+                {/* href={replay.choseUrl} target="_blank" */}
+                <span className="player-btn" onClick={() => openReplay(replay.choseUrl)}>观看</span>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <VideoReplayer url={replay} onClose={() => setReplay('')} />
     </div>
   )
 }

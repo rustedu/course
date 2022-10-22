@@ -2,12 +2,13 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import dayjs from 'dayjs'
 import { map, isEmpty } from 'lodash'
 import { Empty, Spin } from 'antd'
-import videojs from 'video.js'
+// import videojs from 'video.js'
 import { getReplayerChatHistory } from '@/api'
 
-import 'video.js/dist/video-js.min.css'
+// import 'video.js/dist/video-js.min.css'
 import './index.scss'
 
+window.HELP_IMPROVE_VIDEOJS = false
 interface IReplay {
   id: string
   title: string
@@ -53,7 +54,7 @@ const VideoReplayerModal = (props: IProps) => {
         const options = {
           playbackRates: PlayBackRages
         }
-        const player = videojs(videoRef.current, options, function ready() {})
+        const player = (window as any).videojs(videoRef.current, options, function ready() {})
         playerRef.current = player
       }
     }

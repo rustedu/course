@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import { StateProvider } from './context'
 import { RouterProvider } from 'react-router-dom'
@@ -7,6 +8,8 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StateProvider>
-    <RouterProvider router={router} />
+    <Suspense>
+      <RouterProvider router={router} />
+    </Suspense>
   </StateProvider>
 )

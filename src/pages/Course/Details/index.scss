@@ -31,6 +31,9 @@
         position: absolute;
         left: 0;
         bottom: 0;
+        .btn {
+          min-width: 100px;
+        }
         .course-price {
           color: #ff8600;
           font-size: 24px;
@@ -63,6 +66,11 @@
 
 .player-btn {
   cursor: pointer;
+  .icon {
+    transform: translateY(2px);
+    font-size: 26px;
+
+  }
   &:hover {
     color: #ff589e;
   }

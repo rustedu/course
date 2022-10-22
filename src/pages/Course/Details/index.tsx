@@ -59,7 +59,7 @@ const Action = (props: {
     )
   }
   return (
-    <button style={{ width: 100 }} className="btn" onClick={openLoginDialog}>
+    <button className="btn" onClick={openLoginDialog}>
       登录
     </button>
   )

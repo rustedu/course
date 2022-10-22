@@ -43,7 +43,7 @@ const StudentList = (props: { data?: any[] }) => {
 
               <div className="info-other">
                 <span className="current-bg">
-                  <span className="list-item-label">职业:</span> {student.age}{' '}
+                  <span className="list-item-label">职业:</span> {student.age}
                 </span>
               </div>
             </div>

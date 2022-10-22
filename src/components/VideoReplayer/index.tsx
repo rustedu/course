@@ -1,30 +1,52 @@
-import { useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import dayjs from 'dayjs'
-import { map } from 'lodash'
-import { Modal } from 'antd'
+import { map, isEmpty } from 'lodash'
+import { Empty, Spin } from 'antd'
 import videojs from 'video.js'
+import { getReplayerChatHistory } from '@/api'
 
 import 'video.js/dist/video-js.min.css'
 import './index.scss'
 
+interface IReplay {
+  id: string
+  title: string
+  roomId: string
+  choseUrl: string
+  startTime: string
+  endTime: string
+}
 interface IProps {
-  title?: string
-  url?: string
-  startTime?: string
+  replay?: IReplay
   chat?: { totalNum: number; roomActionList: any[] }
-  onClose?: () => void
 }
 
 const PlayBackRages = [0.7, 1.0, 1.5, 2.0]
+const chatHistoryMap: Record<string, any> = {}
 
 const VideoReplayerModal = (props: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const playerRef = useRef<any>(null)
+  const [chatLoading, setChatLoading] = useState(false)
+
+  const getChatHistory = useCallback(async () => {
+    if (props.replay && !chatHistoryMap[props.replay.id]) {
+      setChatLoading(true)
+      const { id, roomId, startTime, endTime } = props.replay
+      const res = await getReplayerChatHistory({ roomId, startTime, endTime })
+      chatHistoryMap[id] = res
+      setChatLoading(false)
+    }
+  }, [props.replay?.id])
+
+  useEffect(() => {
+    getChatHistory()
+  }, [getChatHistory])
 
   const initializeVideo = useCallback(() => {
-    if (!props.url) return
+    if (!props.replay?.choseUrl) return
     if (playerRef.current) {
-      playerRef.current.src(props.url)
+      playerRef.current.src(props.replay?.choseUrl)
       playerRef.current.playbackRates(PlayBackRages)
     } else {
       if (videoRef.current) {
@@ -35,7 +57,7 @@ const VideoReplayerModal = (props: IProps) => {
         playerRef.current = player
       }
     }
-  }, [props.url, videoRef.current])
+  }, [props.replay?.choseUrl, videoRef.current])
 
   useEffect(() => {
     initializeVideo()
@@ -61,56 +83,53 @@ const VideoReplayerModal = (props: IProps) => {
   }, [playerRef])
 
   const setVideoCurrentTime = (time: string) => {
-    if (props.startTime && playerRef.current) {
-      const currentTime = dayjs(time).diff(dayjs(props.startTime), 'second')
+    if (props.replay?.startTime && playerRef.current) {
+      const currentTime = dayjs(time).diff(dayjs(props.replay?.startTime), 'second')
       playerRef.current.currentTime(currentTime)
     }
   }
 
+  const chat = chatHistoryMap[props.replay?.id || '']
+
   return (
-    <Modal
-      title={props?.title || '视频回放'}
-      className="video-replay-modal"
-      open={!!props.url}
-      footer={null}
-      onCancel={() => {
-        dispose()
-        props.onClose?.()
-      }}
-    >
-      <div className="video-replay-wrap">
-        <div className="replay-box">
-          <div data-vjs-player style={{ width: '100%', height: '100%' }}>
-            <video
-              controls
-              ref={videoRef}
-              id="replay-video"
-              className="video-js vjs-big-play-centered"
-              preload="auto"
-              // poster="MY_VIDEO_POSTER.jpg"
-            >
-              <source src={props.url} type="video/mp4" />
-              <p className="vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a web browser
-                that
-                <a href="https://videojs.com/html5-video-support/" target="_blank">
-                  supports HTML5 video
-                </a>
-              </p>
-            </video>
-          </div>
+    <div className="video-replay-wrap">
+      <div className="replay-box">
+        <div data-vjs-player style={{ width: '100%', height: '100%' }}>
+          <video
+            controls
+            ref={videoRef}
+            id="replay-video"
+            className="video-js vjs-big-play-centered"
+            preload="auto"
+            // poster="MY_VIDEO_POSTER.jpg"
+          >
+            <source src={props.replay?.choseUrl} type="video/mp4" />
+            <p className="vjs-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a web browser
+              that
+              <a href="https://videojs.com/html5-video-support/" target="_blank">
+                supports HTML5 video
+              </a>
+            </p>
+          </video>
         </div>
-        <div className="replay-chat-history">
-          <header>
-            <h3>聊天记录 </h3>
-            {props.chat?.totalNum && (
-              <span className="chat-total">
-                共<span>{props.chat.totalNum}</span>条
-              </span>
-            )}
-          </header>
-          <main>
-            {map(props.chat?.roomActionList, (item) => (
+      </div>
+      <div className="replay-chat-history">
+        <header>
+          <h3>聊天记录 </h3>
+          {chat?.totalNum && (
+            <span className="chat-total">
+              共<span>{chat?.totalNum}</span>条
+            </span>
+          )}
+        </header>
+        <main className={`${chatLoading ? 'chat-loading' : ''}`}>
+          {chatLoading ? (
+            <Spin spinning={chatLoading} />
+          ) : isEmpty(chat?.roomActionList) ? (
+            <Empty description="暂无数据" />
+          ) : (
+            map(chat?.roomActionList, (item) => (
               <div key={item.id} className="chat-item">
                 <span className="chator">
                   {item.userName}
@@ -120,11 +139,11 @@ const VideoReplayerModal = (props: IProps) => {
                   {item.description.replace('TEXT:', '')}
                 </pre>
               </div>
-            ))}
-          </main>
-        </div>
+            ))
+          )}
+        </main>
       </div>
-    </Modal>
+    </div>
   )
 }
 

@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Layout from './Layout'
 import HomePage from './pages/HomePage'
 import CourseDetail from './pages/Course/Details'
+import CourseReplay from './pages/Course/Replay'
 import MyCourseList from './pages/MyCourse'
 
 export default createBrowserRouter(
@@ -17,7 +18,11 @@ export default createBrowserRouter(
         },
         {
           path: '/:id',
-          element: <CourseDetail />
+          element: <CourseDetail />,
+        },
+        {
+          path: '/:id/replay/:replayId',
+          element: <CourseReplay />,
         },
         {
           path: 'myCourse',

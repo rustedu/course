@@ -392,6 +392,7 @@ $menu-icon-size: 32px;
     }
   }
   .video-replay-modal {
+    height: calc(100vh - 58px);
     & > header {
       height: 58px;
       padding: 0 10px;
@@ -402,11 +403,13 @@ $menu-icon-size: 32px;
       .video-replay-wrap {
         .replay-box {
           height: 200px;
-
         }
-
+        .replay-chat-history {
+          main {
+            overflow: auto;
+          }
+        }
       }
-
     }
   }
 }

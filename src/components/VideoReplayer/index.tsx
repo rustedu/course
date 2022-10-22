@@ -2,19 +2,18 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import dayjs from 'dayjs'
 import { map, isEmpty } from 'lodash'
 import { Empty, Spin } from 'antd'
-import videojs from 'video.js'
 import { getReplayerChatHistory } from '@/api'
 
-import 'video.js/dist/video-js.min.css'
 import './index.scss'
 
+window.HELP_IMPROVE_VIDEOJS = false
 interface IReplay {
   id: string
   title: string
   roomId: string
   choseUrl: string
-  startTime: string
-  endTime: string
+  startAt: string
+  endAt: string
 }
 interface IProps {
   replay?: IReplay
@@ -32,8 +31,12 @@ const VideoReplayerModal = (props: IProps) => {
   const getChatHistory = useCallback(async () => {
     if (props.replay && !chatHistoryMap[props.replay.id]) {
       setChatLoading(true)
-      const { id, roomId, startTime, endTime } = props.replay
-      const res = await getReplayerChatHistory({ roomId, startTime, endTime })
+      const { id, roomId, startAt, endAt } = props.replay
+      const res = await getReplayerChatHistory({
+        roomId,
+        startTime: startAt,
+        endTime: endAt || dayjs(startAt).add(3, 'hour').toJSON() // consider default endtime as 3 hours later
+      })
       chatHistoryMap[id] = res
       setChatLoading(false)
     }
@@ -53,7 +56,7 @@ const VideoReplayerModal = (props: IProps) => {
         const options = {
           playbackRates: PlayBackRages
         }
-        const player = videojs(videoRef.current, options, function ready() {})
+        const player = (window as any).videojs(videoRef.current, options, function ready() {})
         playerRef.current = player
       }
     }
@@ -83,8 +86,8 @@ const VideoReplayerModal = (props: IProps) => {
   }, [playerRef])
 
   const setVideoCurrentTime = (time: string) => {
-    if (props.replay?.startTime && playerRef.current) {
-      const currentTime = dayjs(time).diff(dayjs(props.replay?.startTime), 'second')
+    if (props.replay?.startAt && playerRef.current) {
+      const currentTime = dayjs(time).diff(dayjs(props.replay?.startAt), 'second')
       playerRef.current.currentTime(currentTime)
     }
   }
@@ -136,7 +139,7 @@ const VideoReplayerModal = (props: IProps) => {
                   <span className="chat-time">{dayjs(item.actionTime).format('HH:mm:ss')}</span>
                 </span>
                 <pre onClick={() => setVideoCurrentTime(item.actionTime)}>
-                  {item.description.replace('TEXT:', '')}
+                  {item.description.replace(/(TEXT:|CODE:)/, '')}
                 </pre>
               </div>
             ))

@@ -72,6 +72,7 @@
           cursor: pointer;
           transition: all 0.3s ease 0s;
           width: fit-content;
+          white-space: break-spaces;
 
           &:hover {
             opacity: 1;

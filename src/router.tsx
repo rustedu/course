@@ -1,10 +1,12 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
 import Layout from './Layout'
-import HomePage from './pages/HomePage'
-import CourseDetail from './pages/Course/Details'
-import CourseReplay from './pages/Course/Replay'
-import MyCourseList from './pages/MyCourse'
+
+const HomePage = lazy(() =>  import('./pages/HomePage'))
+const CourseDetail = lazy(() => import('./pages/Course/Details'))
+const MyCourseList = lazy(() => import('./pages/MyCourse'))
+const CourseReplay = lazy(() => import('./pages/Course/Replay'))
 
 export default createBrowserRouter(
   [
@@ -18,11 +20,11 @@ export default createBrowserRouter(
         },
         {
           path: '/:id',
-          element: <CourseDetail />,
+          element: <CourseDetail />
         },
         {
           path: '/:id/replay/:replayId',
-          element: <CourseReplay />,
+          element: <CourseReplay />
         },
         {
           path: 'myCourse',

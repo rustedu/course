@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import dayjs from 'dayjs'
-import { map, isEmpty } from 'lodash'
-import { Empty, Spin } from 'antd'
+import { filter, map, isEmpty, debounce } from 'lodash'
+import { Empty, Spin, Input } from 'antd'
 import { getReplayerChatHistory } from '@/api'
+import Icon from '@/components/Icon'
+import HighlightText from '@/components/HighlightText'
 
 import './index.scss'
 
@@ -27,6 +29,7 @@ const VideoReplayerModal = (props: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const playerRef = useRef<any>(null)
   const [chatLoading, setChatLoading] = useState(false)
+  const [keyword, setKeyword] = useState('')
 
   const getChatHistory = useCallback(async () => {
     if (props.replay && !chatHistoryMap[props.replay.id]) {
@@ -94,6 +97,25 @@ const VideoReplayerModal = (props: IProps) => {
 
   const chat = chatHistoryMap[props.replay?.id || '']
 
+  const handleSearch = debounce((e) => {
+    const value = e.target.value.trim()
+    setKeyword(value)
+  }, 300)
+
+  const filterChat = () => {
+    if (keyword) {
+      return filter(chat?.roomActionList, (item) => {
+        return (
+          item.userName?.toLowerCase().includes(keyword) ||
+          item.description
+            .replace(/(TEXT:|CODE:)/, '')
+            .toLowerCase()
+            .includes(keyword)
+        )
+      })
+    }
+    return chat?.roomActionList
+  }
   return (
     <div className="video-replay-wrap">
       <div className="replay-box">
@@ -132,17 +154,34 @@ const VideoReplayerModal = (props: IProps) => {
           ) : isEmpty(chat?.roomActionList) ? (
             <Empty description="暂无数据" />
           ) : (
-            map(chat?.roomActionList, (item) => (
-              <div key={item.id} className="chat-item">
-                <span className="chator">
-                  {item.userName}
-                  <span className="chat-time">{dayjs(item.actionTime).format('HH:mm:ss')}</span>
-                </span>
-                <pre onClick={() => setVideoCurrentTime(item.actionTime)}>
-                  {item.description.replace(/(TEXT:|CODE:)/, '')}
-                </pre>
-              </div>
-            ))
+            <>
+              <Input
+                allowClear
+                className="chat-text-search"
+                width="100%"
+                placeholder="请输入查询关键字!"
+                suffix={<Icon symbol="icon-search" />}
+                onChange={handleSearch}
+                onPressEnter={(e) => {
+                  const value = e.currentTarget.value.trim()
+                  setKeyword(value)
+                }}
+              />
+              {map(filterChat(), (item) => (
+                <div key={item.id} className="chat-item">
+                  <span className="chator">
+                    <HighlightText text={item.userName} highlight={keyword} />
+                    <span className="chat-time">{dayjs(item.actionTime).format('HH:mm:ss')}</span>
+                  </span>
+                  <pre onClick={() => setVideoCurrentTime(item.actionTime)}>
+                    <HighlightText
+                      text={item.description.replace(/(TEXT:|CODE:)/, '')}
+                      highlight={keyword}
+                    />
+                  </pre>
+                </div>
+              ))}
+            </>
           )}
         </main>
       </div>

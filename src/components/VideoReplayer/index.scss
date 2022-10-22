@@ -52,6 +52,16 @@
         justify-content: center;
         align-items: center;
       }
+      .chat-text-search {
+        margin-bottom: 14px;
+        border-radius: 16px;
+        height: 36px;
+        .ant-input-suffix {
+          .icon {
+            font-size: 16px;
+          }
+        }
+      }
       .chat-item {
         .chator {
           display: inline-block;

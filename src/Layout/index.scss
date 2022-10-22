@@ -78,7 +78,7 @@ $footer-height: 210px;
     & > .content {
       min-height: calc(100% - #{$footer-height});
       margin: 0 auto;
-      padding: 40px 0;
+      padding: 20px 0 40px;
       display: flex;
       flex-direction: column;
     }
@@ -191,7 +191,14 @@ $footer-height: 210px;
 }
 
 @media (max-width: 1200px) {
+  .container > header {
+    padding: 0 10px;
+  }
   .course-container > header .logo-area {
     font-size: 22px;
+  }
+
+  .container > main > .content {
+    padding: 20px 20px 40px;
   }
 }

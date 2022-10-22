@@ -12,12 +12,14 @@
     }
   }
   .replay-chat-history {
-    width: 20%;
+    width: 300px;
+    min-width: 20%;
     height: 100%;
-    background-color: #f0f0f0;
     margin-left: 20px;
     display: flex;
     flex-direction: column;
+    background-color: #f0f0f0;
+    border: 1px solid #f0f0f0;
     & > header {
       background-color: #fff;
       height: 50px;
@@ -45,6 +47,11 @@
       // height: calc(100% - 50px);
       overflow: auto;
       padding: 8px 12px;
+      &.chat-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .chat-item {
         .chator {
           display: inline-block;
@@ -64,6 +71,7 @@
           border-radius: 4px;
           cursor: pointer;
           transition: all 0.3s ease 0s;
+          width: fit-content;
 
           &:hover {
             opacity: 1;
@@ -75,29 +83,24 @@
   }
 }
 
-.video-replay-modal {
-  &.ant-modal,
-  .ant-modal-content {
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    top: 0;
-  }
-  .ant-modal-content {
-    display: flex;
-    flex-direction: column;
-  }
-  .ant-modal-header {
-    height: 55px;
-  }
-  .ant-modal-body {
-    padding: 0;
-    flex: 1;
-    height: calc(100% - 55px);
-  }
-}
-
 .player-box {
   width: '100%';
   height: '100%';
+}
+
+@media only screen and (min-width: 375px) and (max-width: 1000px) {
+  .video-replay-wrap {
+    display: flex;
+    flex-direction: column;
+    .replay-box {
+      height: 500px;
+      flex: unset;
+    }
+    .replay-chat-history {
+      width: 100%;
+      min-height: 200px;
+      flex: 1;
+      margin-left: 0;
+    }
+  }
 }

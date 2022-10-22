@@ -143,7 +143,7 @@ const RegisterModal = (props: IProps) => {
   }
   return (
     <>
-      <button style={{ width: 120 }} className="btn" onClick={() => setVisible(true)}>
+      <button className="btn" onClick={() => setVisible(true)}>
         立即报名
       </button>
       <Modal

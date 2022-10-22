@@ -4,6 +4,8 @@ import { find } from 'lodash'
 import { message, Tooltip } from 'antd'
 import { getReplayOfCourse } from '@/api'
 import VideoReplayer from '@/components/VideoReplayer'
+// @ts-ignore
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import './index.scss'
 import Icon from '@/components/Icon'
@@ -29,13 +31,14 @@ const CourseReplay = () => {
         <div className="title">{replay?.className}</div>
         <div className="actions">
           <Tooltip title="复制链接">
-            <Icon
-              symbol="icon-share"
-              onClick={() => {
+            <CopyToClipboard
+              text={window.location.href}
+              onCopy={() => {
                 message.success('复制成功!')
-                navigator.clipboard.writeText(window.location.href)
               }}
-            />
+            >
+              <Icon symbol="icon-share" />
+            </CopyToClipboard>
           </Tooltip>
           <Tooltip title="返回课程">
             <Icon symbol="icon-fanhui" onClick={() => navigate(`/${courseId}`)} />

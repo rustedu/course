@@ -1,11 +1,11 @@
-import { Spin } from 'antd'
+import { Spin, SpinProps } from 'antd'
 
 import './index.css'
 
-const Loading = () => {
+const Loading = (props: Partial<SpinProps>) => {
   return (
     <div className="loading-container">
-      <Spin size="large" tip="加载中..." />
+      <Spin tip="数据加载中..." size="small" {...props} />
     </div>
   )
 }

@@ -17,7 +17,7 @@ const ReplayList = (props: { data?: any[] }) => {
     return (
       <div className="list-mobile">
         {map(props.data, (replay) => (
-          <div key={replay.id} className="list-item">
+          <div key={replay.id} className="list-item" onClick={() => openReplay(replay)}>
             <div className="list-item-main-info">
               <div className="info-name">
                 {replay.className}
@@ -35,7 +35,7 @@ const ReplayList = (props: { data?: any[] }) => {
               </div>
             </div>
             <div className="list-item-actions">
-              <Icon symbol="icon-bofang" onClick={() => openReplay(replay)} />
+              <Icon symbol="icon-bofang" />
             </div>
           </div>
         ))}

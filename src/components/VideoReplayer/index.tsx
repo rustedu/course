@@ -122,11 +122,12 @@ const VideoReplayerModal = (props: IProps) => {
         <div data-vjs-player style={{ width: '100%', height: '100%' }}>
           <video
             controls
+            playsInline
             ref={videoRef}
             id="replay-video"
             className="video-js vjs-big-play-centered"
             preload="auto"
-            // poster="MY_VIDEO_POSTER.jpg"
+            // poster={siteConfig.logo}
           >
             <source src={props.replay?.choseUrl} type="video/mp4" />
             <p className="vjs-no-js">

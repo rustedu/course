@@ -104,8 +104,6 @@ $menu-icon-size: 32px;
     &-content {
       padding: 10px 12px;
       .tab-show {
-        display: flex;
-        flex-direction: column;
         margin-bottom: 20px;
         .course-list {
           display: grid;

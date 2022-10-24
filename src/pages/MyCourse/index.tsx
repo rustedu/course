@@ -5,13 +5,16 @@ import { useAppState } from '../../hooks'
 import { getMyCourses } from '../../api'
 import { RoleNameMap } from '../../constants'
 import { EUserType } from '../../types'
+import { layoutPrifix, ELayoutType } from '@/pages/Course'
+import Loading from '../../components/Loading'
+import Icon from '../../components/Icon'
 
 import './index.scss'
-import Loading from '../../components/Loading'
 
 const MyCourseList = () => {
   const [myCourses, setMyCourses] = useState<any[]>([])
   const [total, setTotal] = useState<number>()
+  const [layout, setLayout] = useState(localStorage.getItem(layoutPrifix) || ELayoutType.LIST)
   const {
     state: { currentUser, myRegisters }
   } = useAppState()
@@ -44,6 +47,13 @@ const MyCourseList = () => {
     window.open(url)
   }
 
+  const isGrid = layout === ELayoutType.GRID
+  const changeLayout = () => {
+    const layout = isGrid ? ELayoutType.LIST : ELayoutType.GRID
+    setLayout(layout)
+    localStorage.setItem(layoutPrifix, layout)
+  }
+
   return (
     <div className="mycourse-list-wrapper">
       <header>
@@ -57,7 +67,14 @@ const MyCourseList = () => {
       {total === undefined ? (
         <Loading />
       ) : (
-        <div className="mycourse-list">
+        <div
+          className={`mycourse-list ${
+            isGrid ? 'mycourse-list-layout-grid' : 'mycourse-list-layout-list'
+          }`}
+        >
+          <span className="layout-icon" onClick={changeLayout}>
+            <Icon symbol={layout === ELayoutType.GRID ? 'icon-listgrid' : 'icon-list'} />
+          </span>
           {map(myCourses, (course: any, index) => (
             <div
               key={course.id + course.courseIndex + course.title + index}

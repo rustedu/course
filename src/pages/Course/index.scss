@@ -3,6 +3,10 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 24px;
   row-gap: 32px;
+  position: relative;
+  .layout-icon {
+    display: none;
+  }
   .course-item {
     width: 100%;
     height: 100%;

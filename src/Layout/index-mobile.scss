@@ -129,7 +129,7 @@ $menu-icon-size: 32px;
               height: 80px;
               width: 30%;
               object-fit: cover;
-              border: 1px solid #d3d3d3;
+              border: 1px solid #e3e3e3;
               border-radius: 2px;
             }
             &-content {
@@ -160,7 +160,6 @@ $menu-icon-size: 32px;
 
               .apply-num {
                 font-size: 12px;
-                font-weight: 200;
               }
               .apply-price {
                 font-size: 14px;
@@ -174,17 +173,30 @@ $menu-icon-size: 32px;
           gap: 18px 10px;
           .course-item {
             border-radius: 6px;
+            overflow: hidden;
+            &-content {
+              flex: 1;
+              padding: 4px 10px;
+            }
+            &-cover {
+              height: 146px;
+              border: 1px solid #e3e3e3;
+            }
             &-info {
-              padding: 4px;
+              height: fit-content;
+              padding: 0;
               .info-title {
                 font-size: 14px;
               }
               .summary {
+                -webkit-line-clamp: 2;
                 font-size: 12px;
               }
             }
-            & > footer {
-              padding: 0 10px;
+            footer {
+              position: unset;
+              padding: 0;
+              margin-top: 4px;
               .apply-num {
                 font-size: 12px;
               }

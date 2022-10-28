@@ -26,11 +26,16 @@ const Header = ({ isMobile }: { isMobile?: boolean }) => {
           <div className="logo-area" onClick={() => navigate('//')}>
             <img src={siteConfig.logo} alt="logo" />
             <span className="logo-content">{siteConfig.title}</span>
+            <div className="actions">
+              <a href="/course/">
+                <span className="action-item">课程培训</span>
+              </a>
+            </div>
           </div>
 
           <div className="actions">
             <a href="/homepage/">
-              <span className="action-item">社区</span>
+              <span className="action-item">社区首页</span>
             </a>
             <LoginStatus />
           </div>

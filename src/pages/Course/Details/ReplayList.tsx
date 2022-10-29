@@ -3,7 +3,7 @@ import Icon from '@/components/Icon'
 import { useDeviceDetect } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 
-const headers = ['教室号', '课程名称', '开始时间', '上课地点', '备注', '录像回放']
+const headers = ['教室号', '课程名称', '开始时间', '上课地点', '备注', '课堂回放']
 
 const ReplayList = (props: { data?: any[] }) => {
   const md = useDeviceDetect()

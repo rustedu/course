@@ -142,7 +142,7 @@ const CourseDetail = () => {
     },
     {
       key: 'replay',
-      title: `课程回放(${detailRef.current.validReplayList?.length})`,
+      title: `课堂回放(${detailRef.current.validReplayList?.length})`,
       content: <ReplayList data={detailRef.current.validReplayList} />
     }
   ]

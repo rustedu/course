@@ -1,4 +1,6 @@
 export { useAppState } from '../context'
 export * from './register'
 export * from './siteInfo'
-export * from '././deviceDetect'
+export * from './deviceDetect'
+export * from './login'
+export * from './logout'

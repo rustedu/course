@@ -4,7 +4,7 @@ import { Dropdown, Menu, Modal, Form, Input, Button, message } from 'antd'
 import { USER_INFO_STORAGE_KEY, DETAULT_USER_AVATAR } from '../constants'
 import VerificationCode, { VerificationCodeNum } from '../components/VerificationCode'
 import Icon from '@/components/Icon'
-import { useAppState } from '../hooks'
+import { useAppState, useLogined } from '../hooks'
 
 const PhoneRegex = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
 interface IFromProps {
@@ -70,6 +70,8 @@ const LoginStatus = ({ isMobile }: { isMobile?: boolean }) => {
     dispatch
   } = useAppState()
 
+  useLogined()
+
   const setLoginVisible = (visible: boolean) => {
     dispatch({
       type: 'UPDATE_LOGIN_DIALOG_VISIBLE',
@@ -90,15 +92,6 @@ const LoginStatus = ({ isMobile }: { isMobile?: boolean }) => {
       type: 'LOGOUT'
     })
   }
-  const initUserInfo = useCallback(() => {
-    const phone = localStorage.getItem(USER_INFO_STORAGE_KEY)
-    if (phone) {
-      login(phone)
-    }
-  }, [])
-  useEffect(() => {
-    initUserInfo()
-  }, [initUserInfo])
 
   const handleSubmit = (phone: string) => {
     localStorage.setItem(USER_INFO_STORAGE_KEY, phone)
@@ -112,7 +105,7 @@ const LoginStatus = ({ isMobile }: { isMobile?: boolean }) => {
         {isMobile ? (
           <Icon symbol="icon-user" onClick={() => setLoginVisible(true)} />
         ) : (
-          <span onClick={() => setLoginVisible(true)}>登录</span>
+          <span className="nav-link" onClick={() => setLoginVisible(true)}>登录</span>
         )}
         <Modal
           width={350}

@@ -7,13 +7,22 @@ $menu-icon-size: 32px;
   position: relative;
   display: flex;
 
+  &.os2edu-layout > header {
+    display: none;
+  }
+  .os2edu-layout-main-content {
+    padding: 0;
+  }
+
   /** 布局样式 */
-  & > header {
+  header.main-header {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: $header-height;
+    z-index: 100;
+    background-color: #fff;
     .header-content {
       display: flex;
       justify-content: space-between;

@@ -431,10 +431,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@os2edu/layout@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@os2edu/layout/-/layout-0.0.6.tgz#93e59d286b201f796d2dd9bc04fb024d09f42f23"
-  integrity sha512-hQqyu2GdefNpNCZjAyGd4dCODXRyvPFpeShDJka7t9NQiGKeXNODYoi2WqXqoepRKmVMTGNqxR0S20RtdcJXCw==
+"@os2edu/layout@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@os2edu/layout/-/layout-0.1.0.tgz#d9fe9b2f273eafddd6b20534d1efe10bebff3c36"
+  integrity sha512-pEiizY/vz5l/XwXgNQE7g/MCREdaQLyepenGlf20XqtUE8dRbmy6HARFq3Rx2qJYtmGEUzUrtpgJl9ZoxK9wXg==
 
 "@remix-run/router@1.0.1":
   version "1.0.1"

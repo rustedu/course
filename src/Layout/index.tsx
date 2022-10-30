@@ -24,7 +24,7 @@ const AppLayout = () => {
   useFetchMyRegister()
 
   const redirectToHome = (
-    <span style={{ marginRight: 10 }} className="nav-link" onClick={() => navigate('/')}>
+    <span className="nav-common-link nav-link" onClick={() => navigate('/')}>
       首页
     </span>
   )

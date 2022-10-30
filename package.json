@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@os2edu/layout": "^0.0.6",
+    "@os2edu/layout": "^0.1.0",
     "antd": "^4.23.5",
     "axios": "^1.1.2",
     "dayjs": "^1.11.6",

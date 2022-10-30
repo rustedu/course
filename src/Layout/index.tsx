@@ -24,9 +24,14 @@ const AppLayout = () => {
   useFetchMyRegister()
 
   const redirectToHome = (
-    <span className="nav-common-link nav-link" onClick={() => navigate('/')}>
-      首页
-    </span>
+    <div className='custom-course-nav'>
+      <span className="nav-common-link nav-link" onClick={() => navigate('/')}>
+        首页
+      </span>
+      <span className="nav-common-link nav-link" onClick={() => window.open('http://tasks.os2edu.cn/pc/')}>
+        任务中心
+      </span>
+    </div>
   )
   let extra: Partial<IExtraProps> = {
     customRender: (

@@ -156,9 +156,13 @@ $footer-height: 210px;
   }
 }
 .nav-common-link {
-  padding: 0 18px;
-  width: 100px;
-  text-align: center;
+  padding: 0 2px;
+}
+.custom-course-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+  margin-right: 20px;
 }
 .user-dropdown-menus {
   .ant-dropdown-menu {

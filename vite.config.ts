@@ -4,7 +4,7 @@ import vitePluginImp from 'vite-plugin-imp'
 import { visualizer } from 'rollup-plugin-visualizer'
 import react from '@vitejs/plugin-react'
 
-const siteConfig = require('./site.config.json')
+import siteConfig from './site.config'
 
 // const root = resolve(__dirname, 'src')
 
@@ -54,6 +54,6 @@ export default defineConfig({
     }
   },
   define: {
-    siteConfig: JSON.stringify(siteConfig.default)
+    siteConfig: JSON.stringify(siteConfig)
   }
 })

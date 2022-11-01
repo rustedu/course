@@ -1,6 +1,8 @@
 .video-replay-modal {
   width: 100%;
   height: calc(100vh - 130px);
+  background-color: #fff;
+  padding: 0 16px;
   position: relative;
   & > header {
     height: 40px;

@@ -82,15 +82,3 @@ $color: red;
     }
   }
 }
-
-.title {
-  font-weight: 700;
-  font-style: normal;
-  font-size: 22px;
-  margin-bottom: 24px;
-  &:before {
-    content: '';
-    border-left: 4px solid #0170fe;
-    margin-right: 6px;
-  }
-}

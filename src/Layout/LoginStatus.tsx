@@ -6,7 +6,7 @@ import VerificationCode, { VerificationCodeNum } from '../components/Verificatio
 import Icon from '@/components/Icon'
 import { useAppState, useLogined } from '../hooks'
 
-const PhoneRegex = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+const PhoneRegex = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[0-9])\d{8}$/
 interface IFromProps {
   phone: string
   code: string

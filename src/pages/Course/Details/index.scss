@@ -71,7 +71,6 @@
   .icon {
     transform: translateY(2px);
     font-size: 26px;
-
   }
   &:hover {
     color: #ff589e;
@@ -85,8 +84,33 @@
   & > span {
     font-size: 12px;
   }
-  img {
-    width: 116px;
-    height: 116px;
+  .share-imgs {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    .qr-code {
+      margin-bottom: 8px;
+      width: 100px;
+      height: 100px;
+    }
+    & > img {
+      width: 116px;
+      height: auto;
+    }
+    &-mobile {
+      flex-direction: row;
+      gap: 10px;
+
+      .qr-code {
+        margin-bottom: 0;
+        width: 98px;
+        height: 98px;
+        transform: translateY(-7px);
+      }
+      & > img {
+        width: 110px;
+        height: auto;
+      }
+    }
   }
 }

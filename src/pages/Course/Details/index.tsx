@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, useRef } from 'react'
 import { last, groupBy, keys, sortBy, find } from 'lodash'
 import { Popover } from 'antd'
 import { useParams } from 'react-router-dom'
+import QRCode from 'react-qr-code'
 import { EUserType as EStudentType, IMyRegister } from '../../../types'
 import Tabs from '../../../components/Tabs'
 import Loading from '../../../components/Loading'
@@ -9,18 +10,55 @@ import Icon from '../../../components/Icon'
 import RegisterModal from '../../../components/RegisterModal'
 import { useAppState, useDeviceDetect } from '../../../hooks'
 import { RoleNameMap } from '../../../constants'
+import { BASE_URL } from '@/utils/request'
 import { getCourse, getStudentOfCourse, getReplayOfCourse } from '../../../api'
 import StudentList from './StudentList'
 import ReplayList from './ReplayList'
 
 import './index.scss'
 
-const Share = () => {
+const Share = (props: { courseInfo: any; isMobile?: boolean }) => {
+  const {
+    state: { currentUser, myRegisters },
+    dispatch
+  } = useAppState()
+  const { id: courseId } = useParams<{ id: string }>()
+
+  let miniQRPath: string = ''
+  if (currentUser?.phone) {
+    const registerCourse = find(myRegisters, (course) => course.courseId === courseId)
+
+    if (!!registerCourse) {
+      const path = encodeURIComponent(
+        `pages/room/room?userId=${registerCourse.phone}-m&roomId=${props.courseInfo.roomId}&role=${
+          RoleNameMap[registerCourse.status] || 'student'
+        }&username=${registerCourse.name}-m`
+      )
+      miniQRPath = `${BASE_URL}/seller/api/room/path.jpg?path=${path}`
+    } else {
+      const path = encodeURIComponent(`pages/index/index?roomId=${props.courseInfo.roomId}`)
+      miniQRPath = `${BASE_URL}/seller/api/room/path.jpg?path=${path}`
+    }
+  }
+
   return (
     <div className="share-box">
-      <img src="img/share.png" alt="share" />
-      <span>分享二维码,</span>
-      <span>邀请好友报名</span>
+      <span>
+        <Icon symbol="icon-share" />
+        分享二维码
+      </span>
+      <span style={{ marginBottom: 10 }}>邀请好友加入课堂</span>
+      <div className={`share-imgs ${props.isMobile ? 'share-imgs-mobile' : ''}`}>
+        <span className="qr-code">
+          <QRCode
+            style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+            value={window.location.href}
+            fgColor="#3db477"
+            viewBox={`0 0 256 256`}
+          />
+        </span>
+        {miniQRPath && <img src={miniQRPath} alt="mini" />}
+      </div>
     </div>
   )
 }
@@ -106,7 +144,8 @@ const CourseDetail = () => {
 
       detailRef.current.applyStudents = students // 排除 老师，助教，管理员, 剩下的才认为是学生
       detailRef.current.teacher = last(teacher)
-      setStudents(teacher.concat(tutors, admins, students))
+      const allStudents = teacher.concat(tutors, admins, students)
+      setStudents(allStudents)
       detailRef.current.if_teacher = !detailRef.current.teacher
 
       // 课程回放数据
@@ -175,14 +214,18 @@ const CourseDetail = () => {
           </div>
         </div>
         {!!md?.mobile() ? (
-          <Popover placement="leftTop" content={<Share />} trigger="click">
+          <Popover
+            placement="leftTop"
+            content={<Share courseInfo={courseInfo} isMobile />}
+            trigger="click"
+          >
             <span className="share-icon">
               <Icon symbol="icon-share" />
             </span>
           </Popover>
         ) : (
           <div className="share-area">
-            <Share />
+            <Share courseInfo={courseInfo} />
             {/* <div className="share-box">
             <img src="/img/minipro.jpeg" alt="mini" />
           </div> */}

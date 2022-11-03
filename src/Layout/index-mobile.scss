@@ -540,10 +540,13 @@ $menu-icon-size: 32px;
     }
     .video-replay-content {
       .video-replay-wrap {
+        flex-direction: column;
         .replay-box {
+          position: relative;
           height: 200px;
         }
         .replay-chat-history {
+          height: calc(100% - 200px);
           main {
             overflow: auto;
           }

@@ -59,7 +59,7 @@ const ReplayList = (props: { data?: any[] }) => {
           {map(props.data, (replay, index) => (
             <tr key={replay.id}>
               <td className="lalign">
-                <span>{index + 1}</span>
+                <span className="index">{index + 1}</span>
                 {replay.roomId}
               </td>
               <td>{replay.className}</td>

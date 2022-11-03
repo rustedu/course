@@ -23,6 +23,8 @@ const Share = (props: { courseInfo: any; isMobile?: boolean }) => {
     dispatch
   } = useAppState()
   const { id: courseId } = useParams<{ id: string }>()
+  const shareAreaRef = useRef<HTMLImageElement>(null)
+  const qrcodeRef = useRef<any>(null)
 
   let miniQRPath: string = ''
   if (currentUser?.phone) {
@@ -41,25 +43,35 @@ const Share = (props: { courseInfo: any; isMobile?: boolean }) => {
     }
   }
 
+  useEffect(() => {
+    if (qrcodeRef.current) {
+      const svg = qrcodeRef.current
+      const svgData = new XMLSerializer().serializeToString(svg)
+      shareAreaRef.current!.src = `data:image/svg+xml;base64,${btoa(svgData)}`
+    }
+  }, [qrcodeRef.current])
+
   return (
-    <div className="share-box">
-      <span>
-        <Icon symbol="icon-share" />
-        分享二维码
-      </span>
-      <span style={{ marginBottom: 10 }}>邀请好友加入课堂</span>
-      <div className={`share-imgs ${props.isMobile ? 'share-imgs-mobile' : ''}`}>
-        <span className="qr-code">
-          <QRCode
-            style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
-            value={window.location.href}
-            fgColor="#3db477"
-            viewBox={`0 0 256 256`}
-          />
+    <>
+      <QRCode
+        ref={qrcodeRef}
+        style={{ display: 'none', height: 'auto', maxWidth: '100%', width: '100%' }}
+        value={window.location.href}
+        fgColor="#3db477"
+        viewBox={`0 0 256 256`}
+      />
+      <div className="share-box">
+        <span>
+          <Icon symbol="icon-share" />
+          分享二维码
         </span>
-        {miniQRPath && <img src={miniQRPath} alt="mini" />}
+        <span style={{ marginBottom: 10 }}>邀请好友加入课堂</span>
+        <div className={`share-imgs ${props.isMobile ? 'share-imgs-mobile' : ''}`}>
+          <img ref={shareAreaRef} alt="share-course" className="qr-code" />
+          {miniQRPath && <img src={miniQRPath} alt="mini" />}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 const Action = (props: {

@@ -24,7 +24,7 @@ project provide entry for you to customize site information about site like:
 
   **logo, title, contact, friend link, etc...**
 
-all you need to do is by editing [site.config.json](./site.config.json)
+all you need to do is by editing [site.config.js](./site.config.js)
 
 ### gh-pages setting
 

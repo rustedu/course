@@ -67,6 +67,8 @@ const AppLayout = () => {
   return (
     <Layout
       headerProps={{
+        title: siteConfig.title,
+        logo: siteConfig.logo,
         extra
       }}
       className={`container ${isMobile ? 'container-mobile' : ''}`}

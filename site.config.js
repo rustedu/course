@@ -1,7 +1,7 @@
 export default {
   clientId: 385,
   logo: 'https://ssl.cdn.maodouketang.com/Fpkgonzaw5GTUFa0Bfvd_ZlO5yq1',
-  title: '开源操作系统社区',
+  title: 'test',
   subTitle: '促进操作系统的教学、研究与产业的发展',
   footer: {
     resources: [

@@ -20,18 +20,18 @@ export default {
     ],
     contact: [
       {
-        label: '电话',
-        text: '13691584139'
+        label: '客服电话',
+        text: '131-6751-8813'
       },
       {
-        label: '邮箱',
-        text: 'hello@maodou.io'
+        label: '主页',
+        text: 'https://rustedu.com'
       },
       {
         label: '地址',
         text: '北京市海淀区清华科技园科技大厦C座G05'
       }
     ],
-    recordNumber: '北京清华大学·京ICP备16045052号-11'
+    recordNumber: '北京阿图教育·京ICP备16045052号-13'
   }
 }

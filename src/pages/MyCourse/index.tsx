@@ -39,7 +39,7 @@ const MyCourseList = () => {
   const enterClass = (course: any) => {
     const registerInfo: any = find(myRegisters, ({ courseId }) => courseId === course.courseId)
     const status: EUserType = registerInfo.status
-    const url = `https://room.os2edu.cn?username=${registerInfo.name}&userId=${
+    const url = `${siteConfig.roomURL}?username=${registerInfo.name}&userId=${
       currentUser.phone
     }&role=${RoleNameMap[status] || 'student'}&roomId=${course.roomId}&video=${
       course.ishd || '480p'

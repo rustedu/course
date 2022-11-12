@@ -27,7 +27,6 @@ $color: red;
       padding-left: 200px;
       display: flex;
       align-items: center;
-      gap: 36px;
       background-color: rgba(0, 0, 0, 0.8);
       color: #909090;
       li {
@@ -41,6 +40,10 @@ $color: red;
         border-bottom: 3px solid transparent;
         transition: all 0.2s;
         transform: translateY(2px);
+        margin-right: 36px;
+        &:last-child {
+          margin-right: 0;
+        }
 
         &.active {
           color: #d181ff;

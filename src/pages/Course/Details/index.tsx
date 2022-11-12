@@ -184,7 +184,7 @@ const CourseDetail = () => {
     {
       key: 'intro',
       title: '课程介绍',
-      content: <div dangerouslySetInnerHTML={{ __html: courseInfo.introduction }} />
+      content: <div className="ql-snow ql-editor" dangerouslySetInnerHTML={{ __html: courseInfo.introduction }} />
     },
     {
       key: 'student',

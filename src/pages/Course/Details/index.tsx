@@ -91,7 +91,7 @@ const Action = (props: {
   }
   const enterCourse = (registerCourse: IMyRegister) => {
     const { name, phone, status } = registerCourse
-    const url = `https://room.rustedu.com?username=${name}&userId=${phone}&role=${
+    const url = `${siteConfig.roomURL}?username=${name}&userId=${phone}&role=${
       RoleNameMap[status] || 'student'
     }&roomId=${props.courseInfo.roomId}&video=${props.courseInfo.ishd || '480p'}`
     window.open(url)
@@ -184,7 +184,7 @@ const CourseDetail = () => {
     {
       key: 'intro',
       title: '课程介绍',
-      content: <div dangerouslySetInnerHTML={{ __html: courseInfo.introduction }} />
+      content: <div className="ql-snow ql-editor" dangerouslySetInnerHTML={{ __html: courseInfo.introduction }} />
     },
     {
       key: 'student',

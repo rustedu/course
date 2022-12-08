@@ -66,6 +66,16 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 }
+.adm-modal-footer .adm-modal-button {
+  font-size: var(--adm-font-size-10);
+  line-height: 25px;
+  --background-color: #3db477;
+  --border-color: #3db477;
+}
+.adm-center-popup-body {
+  background-color: rgb(204, 32, 32);
+  
+}
 
 .player-btn {
   cursor: pointer;
@@ -123,4 +133,7 @@
 }
 .adm-center-popup-body {
   background-color: #fff;
+  .adm-space-item{
+    color: #fff;
+  }
 }

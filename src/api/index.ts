@@ -47,7 +47,7 @@ export async function getCourse(id: string) {
 
 export async function getTeachars() {
   return await request<never, { teacherList: any[] }>(
-    `/seller/api/teachers/getAllTeachersByConditionsWithTotal?page=0&size=6&clientId=${CLIENT_ID}`
+    `/seller/api/teachers/getAllTeachersByConditionsWithTotal?page=0&size=10&clientId=${CLIENT_ID}`
   )
 }
 

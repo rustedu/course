@@ -7,13 +7,13 @@
       .tabs-tab {
         font-size: 15px;
         background: rgb(234, 236, 237);
-        height: unset;
-        line-height: unset;
+        height: 28px;
+        line-height: 27px;
         padding: 2px 10px;
         border-radius: 14px;
         &-active {
           border-bottom: none;
-          background-color: #1890ff;
+          background-color: #3db477;
           color: #fff !important;
         }
       }

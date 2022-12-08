@@ -85,7 +85,7 @@ $menu-icon-size: 32px;
   .home-wrapper {
     &-header {
       .intro-cover {
-        height: 220px;
+        height: 130px;
       }
 
       .logo-mark {
@@ -136,10 +136,10 @@ $menu-icon-size: 32px;
             padding: 10px;
             img {
               height: 80px;
-              width: 30%;
+              width: 45%;
               object-fit: cover;
               border: 1px solid #e3e3e3;
-              border-radius: 2px;
+              border-radius: 4px;
             }
             &-content {
               flex: 1;
@@ -152,6 +152,7 @@ $menu-icon-size: 32px;
                 font-size: 14px;
                 font-weight: bold;
                 line-height: unset;
+                max-width: 170px;
               }
               .summary {
                 font-size: 12px;
@@ -238,7 +239,7 @@ $menu-icon-size: 32px;
     }
   }
 
-  $course-detail-cover-height: 260px;
+  $course-detail-cover-height: 52.8vw;
   .course-detail-wrapper {
     .main-content {
       display: flex;
@@ -294,7 +295,7 @@ $menu-icon-size: 32px;
 
       .share-icon {
         position: absolute;
-        top: $course-detail-cover-height + 8px;
+        top: calc($course-detail-cover-height + 8px);
         right: 16px;
         width: 28px;
         height: 28px;
@@ -412,6 +413,7 @@ $menu-icon-size: 32px;
         border-radius: 6px;
         img {
           border-bottom: 1px solid rgb(234, 234, 234);
+          // height: 30px;
         }
         .course-item-content {
           padding: 10px;

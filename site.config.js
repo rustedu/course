@@ -1,6 +1,6 @@
 export default {
   clientId: 450,
-  roomURL: 'https://room.os2edu.cn',
+  roomURL: 'https://room.rustedu.com',
   logo: 'https://ssl.cdn.maodouketang.com/Fi65zYOF9bcEIjo5ZYDrKuosUSiE',
   title: '阿图教育',
   subTitle: '致力于做中国最好的Rust培训品牌',

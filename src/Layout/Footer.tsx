@@ -17,7 +17,7 @@ const Footer = () => {
             <div className="sub-items">
               {map(siteConfig.footer.resources, ({ text, link }) => (
                 <div key={link}>
-                  <a href={link}>{text}</a>
+                  <a href={link} target='_blank'>{text}</a>
                 </div>
               ))}
             </div>

@@ -28,9 +28,6 @@ const AppLayout = () => {
       <span className="nav-common-link nav-link" onClick={() => navigate('/')}>
         课程培训
       </span>
-      <span className="nav-common-link nav-link" onClick={() => window.open('http://tasks.os2edu.cn/pc/')}>
-        任务中心
-      </span>
     </div>
   )
   let extra: Partial<IExtraProps> = {
@@ -69,6 +66,7 @@ const AppLayout = () => {
       headerProps={{
         title: siteConfig.title,
         logo: siteConfig.logo,
+        homeURL:'/',
         extra
       }}
       className={`container ${isMobile ? 'container-mobile' : ''}`}

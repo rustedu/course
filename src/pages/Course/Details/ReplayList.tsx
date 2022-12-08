@@ -1,23 +1,68 @@
-import { map } from 'lodash'
-import Icon from '@/components/Icon'
-import { useDeviceDetect } from '@/hooks'
-import { useNavigate } from 'react-router-dom'
+import { find, map } from "lodash";
+import Icon from "@/components/Icon";
+import { useDeviceDetect, useAppState } from "@/hooks";
+import { useNavigate, useParams } from "react-router-dom";
+import { Modal } from "antd-mobile";
 
-const headers = ['教室号', '课程名称', '开始时间', '上课地点', '备注', '课堂回放']
+const headers = [
+  "教室号",
+  "课程名称",
+  "开始时间",
+  "上课地点",
+  "备注",
+  "课堂回放",
+];
 
 const ReplayList = (props: { data?: any[] }) => {
-  const md = useDeviceDetect()
-  const navigate = useNavigate()
+  const md = useDeviceDetect();
+  const navigate = useNavigate();
+  const {
+    state: { currentUser, myRegisters },
+    dispatch,
+  } = useAppState();
+  const { id: courseId } = useParams<{ id: string }>();
 
   const openReplay = async (replay: any) => {
-    return navigate(`replay/${replay.id}`)
-  }
+    return navigate(`replay/${replay.id}`);
+  };
+
+  const replayClick = (replay: any) => {
+    if (currentUser?.phone) {
+      const registerCourse = find(
+        myRegisters,
+        (course) => course.courseId === courseId
+      );
+      if (registerCourse) {
+        let { verify } = registerCourse;
+        verify === "1"
+          ? openReplay(replay)
+          : Modal.alert({
+              content: "请购买后观看",
+              closeOnMaskClick: true,
+            });
+      } else {
+        Modal.alert({
+          content: "请报名课程后观看",
+          closeOnMaskClick: true,
+        });
+      }
+    } else {
+      dispatch({
+        type: "UPDATE_LOGIN_DIALOG_VISIBLE",
+        payload: true,
+      });
+    }
+  };
 
   if (!!md?.mobile()) {
     return (
       <div className="list-mobile">
         {map(props.data, (replay) => (
-          <div key={replay.id} className="list-item" onClick={() => openReplay(replay)}>
+          <div
+            key={replay.id}
+            className="list-item"
+            onClick={() => replayClick(replay)}
+          >
             <div className="list-item-main-info">
               <div className="info-name">
                 {replay.className}
@@ -28,7 +73,8 @@ const ReplayList = (props: { data?: any[] }) => {
               </div>
 
               <div>
-                <span className="list-item-label">开始时间:</span> {replay.startAt}
+                <span className="list-item-label">开始时间:</span>{" "}
+                {replay.startAt}
               </div>
               <div>
                 <span className="list-item-label">备注:</span> {replay.remark}
@@ -40,7 +86,7 @@ const ReplayList = (props: { data?: any[] }) => {
           </div>
         ))}
       </div>
-    )
+    );
   }
 
   return (
@@ -67,7 +113,10 @@ const ReplayList = (props: { data?: any[] }) => {
               <td>{replay.location}</td>
               <td>{replay.remark}</td>
               <td>
-                <span className="player-btn" onClick={() => openReplay(replay)}>
+                <span
+                  className="player-btn"
+                  onClick={() => replayClick(replay)}
+                >
                   <Icon symbol="icon-bofang" />
                 </span>
               </td>
@@ -76,7 +125,7 @@ const ReplayList = (props: { data?: any[] }) => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default ReplayList
+export default ReplayList;

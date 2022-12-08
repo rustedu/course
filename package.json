@@ -11,6 +11,7 @@
   "dependencies": {
     "@os2edu/layout": "^0.1.4",
     "antd": "^4.23.5",
+    "antd-mobile": "^5.26.0",
     "axios": "^1.1.2",
     "dayjs": "^1.11.6",
     "lodash": "^4.17.21",

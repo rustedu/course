@@ -26,6 +26,7 @@ const Header = ({ isMobile }: { isMobile?: boolean }) => {
         </span>
         <a
           onClick={() => {
+            navigate("//");
             dispatch({
               type: "TAB_CHANGE",
               payload: "ABOUT",

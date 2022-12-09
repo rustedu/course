@@ -12,17 +12,6 @@ const Header = ({ isMobile }: { isMobile?: boolean }) => {
   return (
     <header className="main-header">
       <div className="header-content content">
-        <a
-          onClick={() => {
-            dispatch({
-              type: "TAB_CHANGE",
-              payload: "ABOUT",
-            });
-          }}
-        >
-          <img src={siteConfig.logo} alt="logo" />
-          <span className="action-item">社区</span>
-        </a>
         <span
           onClick={() => {
             navigate("//");
@@ -35,6 +24,17 @@ const Header = ({ isMobile }: { isMobile?: boolean }) => {
           <Icon symbol="icon-home" />
           首页
         </span>
+        <a
+          onClick={() => {
+            dispatch({
+              type: "TAB_CHANGE",
+              payload: "ABOUT",
+            });
+          }}
+        >
+          <img src={siteConfig.logo} alt="logo" />
+          <span className="action-item">关于</span>
+        </a>
         <span>
           <LoginStatus isMobile={isMobile} />
           我的

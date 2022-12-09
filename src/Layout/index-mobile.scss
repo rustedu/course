@@ -16,8 +16,8 @@ $menu-icon-size: 32px;
 
   /** 布局样式 */
   header.main-header {
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: -1px;
     left: 0;
     right: 0;
     height: $header-height;
@@ -189,8 +189,9 @@ $menu-icon-size: 32px;
               padding: 4px 10px;
             }
             &-cover {
-              height: 146px;
+              height: 100px;
               border: 1px solid #e3e3e3;
+              border-radius: 6px 6px 0 0;
             }
             &-info {
               height: fit-content;
@@ -241,6 +242,7 @@ $menu-icon-size: 32px;
 
   $course-detail-cover-height: 52.8vw;
   .course-detail-wrapper {
+    padding: 10px;
     .main-content {
       display: flex;
       flex-direction: column;
@@ -250,13 +252,13 @@ $menu-icon-size: 32px;
         width: 100%;
         height: $course-detail-cover-height;
         object-fit: cover;
-        border-radius: 0;
+        border-radius: 4px;
         border: none;
         overflow: hidden;
       }
       .course-main-info {
         margin-left: 0;
-        padding: 10px;
+        padding: 10px 0px;
         background-color: #fff;
         margin-bottom: 10px;
         border-bottom: 1px solid #e3e3e3;
@@ -266,7 +268,7 @@ $menu-icon-size: 32px;
         }
         .course-info {
           display: flex;
-          gap: 20px;
+          gap: 15px;
         }
         .course-info-item {
           &-label {
@@ -276,39 +278,33 @@ $menu-icon-size: 32px;
           font-size: 14px;
           margin-bottom: 6px;
         }
-        .course-price {
-          position: absolute;
-          top: 8px;
-          right: 60px;
-          font-size: 18px !important;
-        }
-        .course-actions {
-          position: unset;
 
-          .btn {
-            margin: 8px auto;
-            height: 32px;
-            width: 100%;
+        .course-actions {
+          // position: absolute;
+          float: right;
+          bottom: 50px;
+          left: 73%;
+          display: inline-flex;
+          .course-price {
+            font-size: 18px !important;
+            margin-right: 15px;
+          }
+          .share-icon {
+            width: 28px;
+            height: 28px;
+            font-size: 20px;
           }
         }
       }
-
-      .share-icon {
-        position: absolute;
-        top: calc($course-detail-cover-height + 8px);
-        right: 16px;
-        width: 28px;
-        height: 28px;
-        font-size: 20px;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        // color: #f3f3f3;
-        // background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
+      .btn {
+        margin: 8px auto;
+        height: 32px;
+        width: 100%;
       }
     }
-
+  }
+  .ql-editor {
+    padding: 12px 10px;
   }
 
   .teachar-recommand {
@@ -414,7 +410,7 @@ $menu-icon-size: 32px;
         border-radius: 6px;
         img {
           border-bottom: 1px solid rgb(234, 234, 234);
-          // height: 30px;
+          height: 100px;
         }
         .course-item-content {
           padding: 10px;

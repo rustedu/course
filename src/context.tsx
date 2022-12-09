@@ -7,6 +7,7 @@ export type TAppState = {
   currentUser?: ICurrentUser
   myRegisters?: IMyRegister[]
   loginDialogVisible: boolean
+  tabStatus:string
 }
 
 type Action =
@@ -14,6 +15,7 @@ type Action =
   | { type: 'LOGOUT' }
   | { type: 'UPDATE_MY_COURSES'; payload?: IMyRegister[] }
   | { type: 'UPDATE_LOGIN_DIALOG_VISIBLE'; payload: boolean }
+  | { type: 'TAB_CHANGE'; payload: string }
 
 const rootReducer = (state: TAppState, action: Action) => {
   switch (action.type) {
@@ -29,6 +31,9 @@ const rootReducer = (state: TAppState, action: Action) => {
     case 'UPDATE_LOGIN_DIALOG_VISIBLE': {
       return { ...state, loginDialogVisible: action.payload }
     }
+    case 'TAB_CHANGE': {
+      return { ...state, tabStatus: action.payload }
+    }
     default: {
       throw new Error(`[count-context] Unhandled action type: ${(action as any).type}`)
     }
@@ -38,7 +43,8 @@ const rootReducer = (state: TAppState, action: Action) => {
 const initialState: TAppState = {
   currentUser: { phone: localStorage.getItem(USER_INFO_STORAGE_KEY) },
   myRegisters: [],
-  loginDialogVisible: false
+  loginDialogVisible: false,
+  tabStatus: 'INDEX'
 }
 const defaultDispatch: React.Dispatch<Action> = () => initialState // we never actually use this
 const AppContext = createContext({

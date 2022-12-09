@@ -14,7 +14,7 @@ const Header = ({ isMobile }: { isMobile?: boolean }) => {
       <div className="header-content content">
         <span
           onClick={() => {
-            navigate("//");
+            navigate("/");
             dispatch({
               type: "TAB_CHANGE",
               payload: "INDEX",
@@ -26,7 +26,7 @@ const Header = ({ isMobile }: { isMobile?: boolean }) => {
         </span>
         <a
           onClick={() => {
-            navigate("//");
+            navigate("/");
             dispatch({
               type: "TAB_CHANGE",
               payload: "ABOUT",

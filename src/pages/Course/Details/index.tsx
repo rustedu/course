@@ -108,9 +108,8 @@ const Action = (props: {
     const { name, phone, status } = registerCourse;
     const url = `${siteConfig.roomURL}?username=${name}&userId=${phone}&role=${
       RoleNameMap[status] || "student"
-    }&roomId=${props.courseInfo.roomId}&video=${
-      props.courseInfo.ishd || "480p"
-    }`;
+    }&roomId=${props.courseInfo.roomId}&video=${props.courseInfo.ishd || "480p"}
+    &title=${props.courseInfo.title}`;
     window.open(url);
   };
 

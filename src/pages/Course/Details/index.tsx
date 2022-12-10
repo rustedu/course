@@ -16,6 +16,7 @@ import StudentList from "./StudentList";
 import ReplayList from "./ReplayList";
 
 import "./index.scss";
+import { Modal } from "antd-mobile";
 
 const Share = (props: { courseInfo: any; isMobile?: boolean }) => {
   const {
@@ -120,7 +121,18 @@ const Action = (props: {
     );
 
     return !!registerCourse ? (
-      <button className="btn" onClick={() => enterCourse(registerCourse)}>
+      <button
+        className="btn"
+        onClick={() => {
+          let { verify } = registerCourse;
+          verify === "1"
+            ? enterCourse(registerCourse)
+            : Modal.alert({
+                content: "无法进入教室",
+                closeOnMaskClick: true,
+              });
+        }}
+      >
         已报名，进入教室
       </button>
     ) : (

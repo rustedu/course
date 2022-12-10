@@ -251,19 +251,19 @@ const CourseDetail = () => {
                   <span className="course-info-item-label">学生人数: </span>
                   {detailRef.current.applyStudents?.length} 人
                 </div>
-              </div>
                 <span className="course-actions">
-                <div className="course-price">¥ {courseInfo.price}</div>
-                <Popover
-                  placement="leftTop"
-                  content={<Share courseInfo={courseInfo} isMobile />}
-                  trigger="click"
-                >
-                  <span className="share-icon">
-                    <Icon symbol="icon-share" />
-                  </span>
-                </Popover>
-              </span>
+                  <span className="course-price">{"¥" + courseInfo.price}</span>
+                  <Popover
+                    placement="leftTop"
+                    content={<Share courseInfo={courseInfo} isMobile />}
+                    trigger="click"
+                  >
+                    <span className="share-icon">
+                      <Icon symbol="icon-share" />
+                    </span>
+                  </Popover>
+                </span>
+              </div>
               <Action
                 courseInfo={courseInfo}
                 onRegisterCourse={handleRegister}
@@ -283,7 +283,7 @@ const CourseDetail = () => {
                 </div>
               </div>
               <div className="course-actions">
-                <div className="course-price">¥ {courseInfo.price}</div>
+                <div className="course-price"> {"¥" + courseInfo.price}</div>
                 <Action
                   courseInfo={courseInfo}
                   onRegisterCourse={handleRegister}
@@ -294,7 +294,7 @@ const CourseDetail = () => {
               </div>
             </>
           )}
-          </div>
+        </div>
       </section>
 
       <section className="course-intro">

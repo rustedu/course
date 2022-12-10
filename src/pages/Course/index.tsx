@@ -69,7 +69,7 @@ const CourseList = ({ showAll }: { showAll: boolean }) => {
               <span className="apply-num">
                 <span className="apply-num-person">{item.applyCount}</span> 人报名学习
               </span>
-              <span className="apply-price">¥ {item.price}</span>
+              <span className="apply-price">{'¥'+item.price}</span>
             </footer>
           </div>
         </div>

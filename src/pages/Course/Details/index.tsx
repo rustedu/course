@@ -207,7 +207,11 @@ const CourseDetail = () => {
   useEffect(() => {
     loadData();
   }, [loadData]);
-
+  useEffect(() => {
+    if (!!courseInfo.title) {
+      document.title = "rust培训 - " + (courseInfo.title || "") + " - 阿图教育";
+    }
+  }, [courseInfo]);
   if (loading) {
     return <Loading />;
   }

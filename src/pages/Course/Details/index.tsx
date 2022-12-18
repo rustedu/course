@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, useRef } from "react";
 import { last, groupBy, keys, sortBy, find } from "lodash";
-import { Popover } from "antd";
+import { Descriptions, Popover } from "antd";
 import { useParams } from "react-router-dom";
 import QRCode from "react-qr-code";
 import { EUserType as EStudentType, IMyRegister } from "../../../types";
@@ -208,10 +208,31 @@ const CourseDetail = () => {
     loadData();
   }, [loadData]);
   useEffect(() => {
+    return () => {
+      // Rust培训 - 致力于做中国最好的Rust培训品牌 - 阿图教育
+      let title = "Rust培训 - 致力于做中国最好的Rust培训品牌 - 阿图教育";
+      document.title = title;
+      document
+        .querySelector('meta[name="description"]')
+        ?.setAttribute("content", title);
+      document
+        .querySelector('meta[name="keywords"]')
+        ?.setAttribute("content", title);
+    };
+  }, []);
+  useEffect(() => {
     if (!!courseInfo.title) {
-      document.title = "Rust培训 - " + (courseInfo.title || "") + " - 阿图教育";
+      let title = "Rust培训 - " + (courseInfo.title || "") + " - 阿图教育";
+      document.title = title;
+      document
+        .querySelector('meta[name="description"]')
+        ?.setAttribute("content", courseInfo.summary);
+      document
+        .querySelector('meta[name="keywords"]')
+        ?.setAttribute("content", title);
     }
   }, [courseInfo]);
+  
   if (loading) {
     return <Loading />;
   }

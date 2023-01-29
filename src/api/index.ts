@@ -23,7 +23,7 @@ export async function getCourses(popular?: boolean) {
 
 export async function getMyCourses(phone: string, page = 0) {
   return await request<never, { courseList: any[]; totalNum: number }>(
-    '/seller/api/students/getAllCourseByStudentWithTotal',
+    '/seller/api/students/getAllCourseByStudentWithTotal?clientId=450',
     {
       params: {
         page,

@@ -14,6 +14,7 @@ import { BASE_URL } from "@/utils/request";
 import { getCourse, getStudentOfCourse, getReplayOfCourse } from "../../../api";
 import StudentList from "./StudentList";
 import ReplayList from "./ReplayList";
+import { Helmet } from "react-helmet";
 
 import "./index.scss";
 import { Modal } from "antd-mobile";
@@ -108,8 +109,9 @@ const Action = (props: {
     const { name, phone, status } = registerCourse;
     const url = `${siteConfig.roomURL}?username=${name}&userId=${phone}&role=${
       RoleNameMap[status] || "student"
-    }&roomId=${props.courseInfo.roomId}&video=${props.courseInfo.ishd || "480p"}
-    &title=${props.courseInfo.title}`;
+    }&roomId=${props.courseInfo.roomId}&video=${
+      props.courseInfo.ishd || "480"
+    }p&title=${props.courseInfo.title}`;
     window.open(url);
   };
 
@@ -207,32 +209,32 @@ const CourseDetail = () => {
   useEffect(() => {
     loadData();
   }, [loadData]);
-  useEffect(() => {
-    return () => {
-      // Rust培训 - 致力于做中国最好的Rust培训品牌 - 阿图教育
-      let title = "Rust培训 - 致力于做中国最好的Rust培训品牌 - 阿图教育";
-      document.title = title;
-      document
-        .querySelector('meta[name="description"]')
-        ?.setAttribute("content", title);
-      document
-        .querySelector('meta[name="keywords"]')
-        ?.setAttribute("content", title);
-    };
-  }, []);
-  useEffect(() => {
-    if (!!courseInfo.title) {
-      let title = "Rust培训 - " + (courseInfo.title || "") + " - 阿图教育";
-      document.title = title;
-      document
-        .querySelector('meta[name="description"]')
-        ?.setAttribute("content", courseInfo.summary);
-      document
-        .querySelector('meta[name="keywords"]')
-        ?.setAttribute("content", title);
-    }
-  }, [courseInfo]);
-  
+  // useEffect(() => {
+  //   return () => {
+  //     // Rust培训 - 致力于做中国最好的Rust培训品牌 - 阿图教育
+  //     let title = "Rust培训 - 致力于做中国最好的Rust培训品牌 - 阿图教育";
+  //     document.title = title;
+  //     document
+  //       .querySelector('meta[name="description"]')
+  //       ?.setAttribute("content", title);
+  //     document
+  //       .querySelector('meta[name="keywords"]')
+  //       ?.setAttribute("content", title);
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   if (!!courseInfo.title) {
+  //     let title = "Rust培训 - " + (courseInfo.title || "") + " - 阿图教育";
+  //     document.title = title;
+  //     document
+  //       .querySelector('meta[name="description"]')
+  //       ?.setAttribute("content", courseInfo.summary);
+  //     document
+  //       .querySelector('meta[name="keywords"]')
+  //       ?.setAttribute("content", title);
+  //   }
+  // }, [courseInfo]);
+
   if (loading) {
     return <Loading />;
   }
@@ -267,6 +269,17 @@ const CourseDetail = () => {
   };
   return (
     <div className="course-detail-wrapper">
+      <Helmet>
+        <title>{"Rust培训 - " + courseInfo.title + " - 阿图教育"}</title>
+        <meta name="description" content={courseInfo.summary} />
+        <meta
+          name="keywords"
+          content={
+            courseInfo.title +
+            "毛豆课堂,在线教育,互动教室,网校系统,在线直播教室,互动教学平台"
+          }
+        />
+      </Helmet>
       <section className="main-content">
         <img
           src={courseInfo.coverUrl}

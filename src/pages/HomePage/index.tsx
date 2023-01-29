@@ -5,6 +5,7 @@ import CourseList from "../Course";
 import TeacharList from "../Course/TeacherList";
 
 import "./index.scss";
+import { Helmet } from "react-helmet";
 
 enum ETabs {
   INDEX = "INDEX",
@@ -50,6 +51,9 @@ function HomePage() {
   const renderMainContent = () => {
     return (
       <>
+      <Helmet>
+      <meta name="description" content={config.aboutUsInfo} />
+      </Helmet>
         <section
           className={setTabClassName(
             tabStatus === ETabs.INDEX || tabStatus === ETabs.COURSE

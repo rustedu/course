@@ -41,9 +41,7 @@ const MyCourseList = () => {
     const status: EUserType = registerInfo.status
     const url = `${siteConfig.roomURL}?username=${registerInfo.name}&userId=${
       currentUser.phone
-    }&role=${RoleNameMap[status] || 'student'}&roomId=${course.roomId}&video=${
-      course.ishd || '480p'
-    }`
+    }&role=${RoleNameMap[status] || 'student'}&roomId=${course.roomId}&video=${course.ishd || '480'}p&title=${course.title}`
     window.open(url)
   }
 

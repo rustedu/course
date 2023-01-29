@@ -222,18 +222,18 @@ const CourseDetail = () => {
   //       ?.setAttribute("content", title);
   //   };
   // }, []);
-  // useEffect(() => {
-  //   if (!!courseInfo.title) {
-  //     let title = "Rust培训 - " + (courseInfo.title || "") + " - 阿图教育";
-  //     document.title = title;
-  //     document
-  //       .querySelector('meta[name="description"]')
-  //       ?.setAttribute("content", courseInfo.summary);
-  //     document
-  //       .querySelector('meta[name="keywords"]')
-  //       ?.setAttribute("content", title);
-  //   }
-  // }, [courseInfo]);
+  useEffect(() => {
+    if (!!courseInfo.title) {
+      let title = "Rust培训 - " + (courseInfo.title || "") + " - 阿图教育";
+      document.title = title;
+      document
+        .querySelector('meta[name="description"]')
+        ?.setAttribute("content", courseInfo.summary);
+      document
+        .querySelector('meta[name="keywords"]')
+        ?.setAttribute("content", title);
+    }
+  }, [courseInfo]);
 
   if (loading) {
     return <Loading />;
@@ -271,8 +271,13 @@ const CourseDetail = () => {
     <div className="course-detail-wrapper">
       <Helmet>
         <title>{"Rust培训 - " + courseInfo.title + " - 阿图教育"}</title>
-        <meta name="description" content={courseInfo.summary} />
         <meta
+          data-n-head="ssr"
+          name="description"
+          content={courseInfo.summary}
+        />
+        <meta
+          data-n-head="ssr"
           name="keywords"
           content={
             courseInfo.title +
